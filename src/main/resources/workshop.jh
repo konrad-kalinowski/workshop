@@ -1,0 +1,54 @@
+entity Owner {
+	firstName String required,
+	lastName String required,
+	email String,
+	phoneNumber String required
+}
+
+entity Vehicle {
+	registrationNumber String required,
+	brand String required,
+	model String required
+}
+
+entity Task {
+	title String required
+}
+
+entity Part{
+	name String required
+}
+
+entity Repair {
+	jobTitle String required,
+	price Long required,
+    date Instant required
+}
+
+entity RepairHistory {
+}
+
+
+relationship OneToOne {
+	RepairHistory{vehicle} to Vehicle
+}
+
+relationship OneToMany {
+	Repair{task} to Task,
+    Vehicle{owner} to Owner,
+    Repair{part} to Part
+}
+
+relationship OneToMany {
+	RepairHistory{repair} to Repair
+}
+
+// Set pagination options
+paginate all with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with mySuffix
