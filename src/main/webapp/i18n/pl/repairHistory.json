@@ -1,0 +1,22 @@
+
+{
+    "workshopApp": {
+        "repairHistory" : {
+            "home": {
+                "title": "Repair Histories",
+                "createLabel": "Dodaj Repair History",
+                "createOrEditLabel": "Dodaj lub edytuj: Repair History"
+            },
+            "created": "Utworzono nowy Repair History z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Repair History z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Repair History z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Repair History {{ id }}?"
+            },
+            "detail": {
+                "title": "Repair History"
+            },
+            "vehicle": "Vehicle"
+        }
+    }
+}

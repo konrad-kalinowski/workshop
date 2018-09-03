@@ -1,0 +1,24 @@
+{
+    "name": "RepairHistory",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "vehicle",
+            "otherEntityName": "vehicle",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "repairHistory"
+        }
+    ],
+    "changelogDate": "20180903211607",
+    "entityTableName": "repair_history",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "mySuffix"
+}

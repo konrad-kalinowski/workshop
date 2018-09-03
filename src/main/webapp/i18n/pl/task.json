@@ -1,0 +1,22 @@
+
+{
+    "workshopApp": {
+        "task" : {
+            "home": {
+                "title": "Tasks",
+                "createLabel": "Dodaj Task",
+                "createOrEditLabel": "Dodaj lub edytuj: Task"
+            },
+            "created": "Utworzono nowy Task z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Task z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Task z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Task {{ id }}?"
+            },
+            "detail": {
+                "title": "Task"
+            },
+            "title": "Title"
+        }
+    }
+}

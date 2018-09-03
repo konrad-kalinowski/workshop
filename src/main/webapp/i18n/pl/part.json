@@ -1,0 +1,22 @@
+
+{
+    "workshopApp": {
+        "part" : {
+            "home": {
+                "title": "Parts",
+                "createLabel": "Dodaj Part",
+                "createOrEditLabel": "Dodaj lub edytuj: Part"
+            },
+            "created": "Utworzono nowy Part z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Part z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Part z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Part {{ id }}?"
+            },
+            "detail": {
+                "title": "Part"
+            },
+            "name": "Name"
+        }
+    }
+}

@@ -1,27 +1,26 @@
 entity Owner {
-	firstName String required,
-	lastName String required,
-	email String,
-	phoneNumber String required
+   firstName String required,
+   lastName String required,
+   email String,
+   phoneNumber String required
 }
 
 entity Vehicle {
-	registrationNumber String required,
-	brand String required,
-	model String required
+   registrationNumber String required,
+   brand String required,
+   model String required
 }
 
 entity Task {
-	title String required
+   title String required
 }
 
 entity Part{
-	name String required
+   name String required
 }
 
 entity Repair {
-	jobTitle String required,
-	price Long required,
+   price Long required,
     date Instant required
 }
 
@@ -30,17 +29,14 @@ entity RepairHistory {
 
 
 relationship OneToOne {
-	RepairHistory{vehicle} to Vehicle
+   RepairHistory{vehicle} to Vehicle
 }
 
-relationship OneToMany {
-	Repair{task} to Task,
-    Vehicle{owner} to Owner,
-    Repair{part} to Part
-}
-
-relationship OneToMany {
-	RepairHistory{repair} to Repair
+relationship ManyToOne {
+  Vehicle{owner} to Owner,
+  Repair{history} to RepairHistory,
+  Repair{task} to Task,
+  Repair{part} to Part
 }
 
 // Set pagination options

@@ -1,0 +1,25 @@
+
+{
+    "workshopApp": {
+        "owner" : {
+            "home": {
+                "title": "Owners",
+                "createLabel": "Dodaj Owner",
+                "createOrEditLabel": "Dodaj lub edytuj: Owner"
+            },
+            "created": "Utworzono nowy Owner z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Owner z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Owner z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Owner {{ id }}?"
+            },
+            "detail": {
+                "title": "Owner"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "phoneNumber": "Phone Number"
+        }
+    }
+}

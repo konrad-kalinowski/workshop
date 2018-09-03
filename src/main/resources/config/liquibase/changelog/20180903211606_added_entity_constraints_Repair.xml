@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Repair.
+    -->
+    <changeSet id="20180903211606-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="history_id"
+                                 baseTableName="repair"
+                                 constraintName="fk_repair_history_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="repair_history"/>
+
+        <addForeignKeyConstraint baseColumnNames="task_id"
+                                 baseTableName="repair"
+                                 constraintName="fk_repair_task_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task"/>
+
+        <addForeignKeyConstraint baseColumnNames="part_id"
+                                 baseTableName="repair"
+                                 constraintName="fk_repair_part_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="part"/>
+
+    </changeSet>
+</databaseChangeLog>

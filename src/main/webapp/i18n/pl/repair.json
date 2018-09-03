@@ -1,0 +1,26 @@
+
+{
+    "workshopApp": {
+        "repair" : {
+            "home": {
+                "title": "Repairs",
+                "createLabel": "Dodaj Repair",
+                "createOrEditLabel": "Dodaj lub edytuj: Repair"
+            },
+            "created": "Utworzono nowy Repair z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Repair z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Repair z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Repair {{ id }}?"
+            },
+            "detail": {
+                "title": "Repair"
+            },
+            "price": "Price",
+            "date": "Date",
+            "history": "History",
+            "task": "Task",
+            "part": "Part"
+        }
+    }
+}

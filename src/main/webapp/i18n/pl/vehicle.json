@@ -1,0 +1,25 @@
+
+{
+    "workshopApp": {
+        "vehicle" : {
+            "home": {
+                "title": "Vehicles",
+                "createLabel": "Dodaj Vehicle",
+                "createOrEditLabel": "Dodaj lub edytuj: Vehicle"
+            },
+            "created": "Utworzono nowy Vehicle z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Vehicle z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Vehicle z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Vehicle {{ id }}?"
+            },
+            "detail": {
+                "title": "Vehicle"
+            },
+            "registrationNumber": "Registration Number",
+            "brand": "Brand",
+            "model": "Model",
+            "owner": "Owner"
+        }
+    }
+}
