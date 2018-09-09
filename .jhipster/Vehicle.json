@@ -39,6 +39,5 @@
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,
     "clientRootFolder": "",
-    "applications": "*",
-    "angularJSSuffix": "mySuffix"
+    "applications": "*"
 }

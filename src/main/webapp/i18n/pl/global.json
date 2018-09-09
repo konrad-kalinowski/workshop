@@ -7,12 +7,12 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Encje",
-                "ownerMySuffix": "Owner",
-                "vehicleMySuffix": "Vehicle",
-                "taskMySuffix": "Task",
-                "partMySuffix": "Part",
-                "repairMySuffix": "Repair",
-                "repairHistoryMySuffix": "Repair History",
+                "owner": "Owner",
+                "vehicle": "Vehicle",
+                "task": "Task",
+                "part": "Part",
+                "repair": "Repair",
+                "repairHistory": "Repair History",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
