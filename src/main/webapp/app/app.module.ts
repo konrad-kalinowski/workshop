@@ -16,6 +16,7 @@ import { WorkshopAppRoutingModule } from './app-routing.module';
 import { WorkshopHomeModule } from './home/home.module';
 import { WorkshopAccountModule } from './account/account.module';
 import { WorkshopEntityModule } from './entities/entity.module';
+import { WorkshopAppRepairFormModule } from './repair-form/repair-form.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
@@ -29,6 +30,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         WorkshopHomeModule,
         WorkshopAccountModule,
         WorkshopEntityModule
+        WorkshopAppRepairFormModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
