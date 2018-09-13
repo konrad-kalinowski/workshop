@@ -6,6 +6,10 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ITask } from 'app/shared/model/task.model';
 import { JhiAlertService } from 'ng-jhipster';
 import { IPart } from 'app/shared/model/part.model';
+import { OwnerService } from 'app/entities/owner';
+import { IOwner } from 'app/shared/model/owner.model';
+import { IVehicle } from 'app/shared/model/vehicle.model';
+import { VehicleService } from 'app/entities/vehicle';
 
 @Component({
   selector: 'jhi-repair-form',
@@ -13,15 +17,21 @@ import { IPart } from 'app/shared/model/part.model';
 })
 export class RepairFormComponent implements OnInit {
 
+  owners: IOwner[];
   tasks: ITask[];
   parts: IPart[];
+  vehicles: IVehicle[];
 
+  selectedVehicle: IVehicle;
+  selectedOwner: IOwner;
   selectedTasks = [];
 
   constructor(
     private jhiAlertService: JhiAlertService,
     private taskService: TaskService,
-    private partService: PartService) {
+    private ownerService: OwnerService,
+    private partService: PartService,
+    private vehicleService: VehicleService) {
 
   }
 
@@ -38,9 +48,24 @@ export class RepairFormComponent implements OnInit {
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
+    this.ownerService.query().subscribe(
+      (res: HttpResponse<IOwner[]>) => {
+        this.owners = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
+    this.vehicleService.query().subscribe(
+      (res: HttpResponse<IVehicle[]>) => {
+          this.vehicles = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   private onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+  save() {
+
   }
 }

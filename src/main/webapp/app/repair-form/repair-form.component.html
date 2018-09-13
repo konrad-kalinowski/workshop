@@ -1,12 +1,29 @@
 <div class="row justify-content-center">
   <div class="col-8">
-    <ng-select
-    #select
-    [items]="tasks"
-    [multiple]="true"
-    bindLabel="title"
-    [(ngModel)]="selectedTasks">
-</ng-select>
-
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <h2 id="jhi-vehicle-heading" jhiTranslate="repair-form.title">add repair</h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+      </div>
+      <div class="form-group">
+          <label class="form-control-label" jhiTranslate="repair-form.owner" for="field_owner">Owner</label>
+          <select class="form-control" id="field_owner" name="owner" [(ngModel)]="selectedOwner" >
+              <option [ngValue]="ownerOption" *ngFor="let ownerOption of owners">{{ownerOption.lastName}} {{ownerOption.firstName}}</option>
+          </select>
+      </div>
+      <div class="form-group">
+          <label class="form-control-label" jhiTranslate="repair-form.vehicle" for="field_vehicle">Vehicle</label>
+          <select class="form-control" id="field_vehicle" name="vehicle" [(ngModel)]="selectedVehicle">
+              <option [ngValue]="vehicleOption" *ngFor="let vehicleOption of vehicles">{{vehicleOption.brand}} {{vehicleOption.model}} {{vehicleOption.registrationNumber}}</option>
+          </select>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="repair-form.tasks" for="tasks">Naprawa
+        </label>
+        <ng-select #select [items]="tasks" [multiple]="true" bindLabel="title" [(ngModel)]="selectedTasks" id="tasks" name="tasks"
+           >
+        </ng-select>
+      </div>
+    </form>
   </div>
 </div>
