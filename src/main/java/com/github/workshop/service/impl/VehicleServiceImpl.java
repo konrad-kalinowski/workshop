@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Optional;
+
 /**
  * Service Implementation for managing Vehicle.
  */
@@ -50,15 +51,21 @@ public class VehicleServiceImpl implements VehicleService {
     /**
      * Get all the vehicles.
      *
+     * @param ownerId
      * @param pageable the pagination information
      * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<VehicleDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all Vehicles");
-        return vehicleRepository.findAll(pageable)
-            .map(vehicleMapper::toDto);
+    public Page<VehicleDTO> findAll(Long ownerId, Pageable pageable) {
+        log.debug("Request to get Vehicles for ownerId={}", ownerId);
+        Page<Vehicle> vehiclePage;
+        if (ownerId != null) {
+            vehiclePage = vehicleRepository.findByOwnerId(ownerId, pageable);
+        } else {
+            vehiclePage = vehicleRepository.findAll(pageable);
+        }
+        return vehiclePage.map(vehicleMapper::toDto);
     }
 
 

@@ -10,6 +10,7 @@ import { OwnerService } from 'app/entities/owner';
 import { IOwner } from 'app/shared/model/owner.model';
 import { IVehicle } from 'app/shared/model/vehicle.model';
 import { VehicleService } from 'app/entities/vehicle';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-repair-form',
@@ -22,6 +23,7 @@ export class RepairFormComponent implements OnInit {
   parts: IPart[];
   vehicles: IVehicle[];
 
+  isSaving: boolean;
   selectedVehicle: IVehicle;
   selectedOwner: IOwner;
   selectedTasks = [];
@@ -31,7 +33,9 @@ export class RepairFormComponent implements OnInit {
     private taskService: TaskService,
     private ownerService: OwnerService,
     private partService: PartService,
-    private vehicleService: VehicleService) {
+    private vehicleService: VehicleService,
+    private router: Router,
+    ) {
 
   }
 
@@ -54,18 +58,34 @@ export class RepairFormComponent implements OnInit {
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
-    this.vehicleService.query().subscribe(
-      (res: HttpResponse<IVehicle[]>) => {
-          this.vehicles = res.body;
-      },
-      (res: HttpErrorResponse) => this.onError(res.message)
-    );
+
   }
 
   private onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
-  save() {
+  fetchOwnerVehicles() {
+    this.vehicleService.query({
+      ownerId: this.selectedOwner.id
+  }).subscribe(
+      (res: HttpResponse<IVehicle[]>) => {
+        this.vehicles = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
+  }
 
+  save() {
+}
+  previousState() {
+    this.router.navigate(['']);
+  }
+  private onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  private onSaveError() {
+    this.isSaving = false;
   }
 }

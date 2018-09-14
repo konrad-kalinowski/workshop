@@ -90,9 +90,11 @@ public class VehicleResource {
      */
     @GetMapping("/vehicles")
     @Timed
-    public ResponseEntity<List<VehicleDTO>> getAllVehicles(Pageable pageable) {
+    public ResponseEntity<List<VehicleDTO>> getAllVehicles(
+        @RequestParam(name = "ownerId", required = false) Long ownerId,
+        Pageable pageable) {
         log.debug("REST request to get a page of Vehicles");
-        Page<VehicleDTO> page = vehicleService.findAll(pageable);
+        Page<VehicleDTO> page = vehicleService.findAll(ownerId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/vehicles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
