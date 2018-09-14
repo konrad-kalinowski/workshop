@@ -2,6 +2,7 @@ package com.github.workshop.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.github.workshop.service.RepairHistoryService;
+import com.github.workshop.service.dto.NewRepairDTO;
 import com.github.workshop.web.rest.errors.BadRequestAlertException;
 import com.github.workshop.web.rest.util.HeaderUtil;
 import com.github.workshop.web.rest.util.PaginationUtil;
@@ -79,6 +80,17 @@ public class RepairHistoryResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, repairHistoryDTO.getId().toString()))
             .body(result);
+    }
+
+
+    @PostMapping("/repair-histories/new-repair")
+    @Timed
+    public ResponseEntity<String> addNewRepair(@RequestBody NewRepairDTO repairHistoryDTO) throws URISyntaxException {
+        log.debug("REST request to add new repair to repair History : {}", repairHistoryDTO);
+        RepairHistoryDTO result = repairHistoryService.saveNewRepair(repairHistoryDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "dupa-cycki"))
+            .body("");
     }
 
     /**

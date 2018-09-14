@@ -1,5 +1,6 @@
 package com.github.workshop.service;
 
+import com.github.workshop.service.dto.NewRepairDTO;
 import com.github.workshop.service.dto.RepairHistoryDTO;
 
 import org.springframework.data.domain.Page;
@@ -43,4 +44,6 @@ public interface RepairHistoryService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    RepairHistoryDTO saveNewRepair(NewRepairDTO repairDTO);
 }

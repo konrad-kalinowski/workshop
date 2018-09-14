@@ -6,6 +6,23 @@
         <jhi-alert-error></jhi-alert-error>
       </div>
       <div class="form-group">
+        <label class="form-control-label" jhiTranslate="repair-form.date" for="field_date">Date</label>
+        <div class="d-flex">
+            <input id="field_date" type="date" class="form-control" name="date" [(ngModel)]="repairDate"
+            required/>
+        </div>
+        <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+            <small class="form-text text-danger"
+            [hidden]="!editForm.controls.date?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+            </small>
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.date?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                This field should be a date and time.
+            </small>
+        </div>
+    </div>
+      <div class="form-group">
           <label class="form-control-label" jhiTranslate="repair-form.owner" for="field_owner">Owner</label>
           <select class="form-control" id="field_owner" name="owner" [(ngModel)]="selectedOwner" required (ngModelChange)="fetchOwnerVehicles()" >
               <option [ngValue]="ownerOption" *ngFor="let ownerOption of owners">{{ownerOption.lastName}} {{ownerOption.firstName}}</option>
@@ -24,6 +41,13 @@
            >
         </ng-select>
       </div>
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="repair-form.parts" for="parts">Części
+        </label>
+        <ng-select #select [items]="parts" [multiple]="true" bindLabel="name" [(ngModel)]="selectedParts" id="parts" name="parts"
+           >
+        </ng-select>
+      </div>
       <div>
         <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
             <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
@@ -32,6 +56,8 @@
             <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
+    
+
     </form>
   </div>
 </div>

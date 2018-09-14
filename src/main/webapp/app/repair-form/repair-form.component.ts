@@ -11,6 +11,8 @@ import { IOwner } from 'app/shared/model/owner.model';
 import { IVehicle } from 'app/shared/model/vehicle.model';
 import { VehicleService } from 'app/entities/vehicle';
 import { Router } from '@angular/router';
+import { RepairHistoryService } from 'app/entities/repair-history';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'jhi-repair-form',
@@ -23,10 +25,12 @@ export class RepairFormComponent implements OnInit {
   parts: IPart[];
   vehicles: IVehicle[];
 
+  repairDate: string;
   isSaving: boolean;
   selectedVehicle: IVehicle;
   selectedOwner: IOwner;
   selectedTasks = [];
+  selectedParts = [];
 
   constructor(
     private jhiAlertService: JhiAlertService,
@@ -35,7 +39,9 @@ export class RepairFormComponent implements OnInit {
     private partService: PartService,
     private vehicleService: VehicleService,
     private router: Router,
-    ) {
+    private repairHistoryService: RepairHistoryService,
+    private datePipe: DatePipe
+  ) {
 
   }
 
@@ -58,8 +64,12 @@ export class RepairFormComponent implements OnInit {
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
-
+    this.repairDate = this.today();
   }
+
+  today() {
+    return this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+}
 
   private onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
@@ -67,7 +77,7 @@ export class RepairFormComponent implements OnInit {
   fetchOwnerVehicles() {
     this.vehicleService.query({
       ownerId: this.selectedOwner.id
-  }).subscribe(
+    }).subscribe(
       (res: HttpResponse<IVehicle[]>) => {
         this.vehicles = res.body;
       },
@@ -76,7 +86,14 @@ export class RepairFormComponent implements OnInit {
   }
 
   save() {
-}
+    this.isSaving = true;
+      this.subscribeToSaveResponse(this.repairHistoryService.addNewRepair(this.selectedVehicle, this.repairDate, this.selectedParts, this.selectedTasks));
+  }
+
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IVehicle>>) {
+    result.subscribe((res: HttpResponse<IVehicle>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  }
+
   previousState() {
     this.router.navigate(['']);
   }

@@ -5,6 +5,10 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IRepairHistory } from 'app/shared/model/repair-history.model';
+import { IVehicle } from 'app/shared/model/vehicle.model';
+import { IPart } from 'app/shared/model/part.model';
+import { ITask } from 'app/shared/model/task.model';
+import { NewRepair } from 'app/shared/model/new-repair.model';
 
 type EntityResponseType = HttpResponse<IRepairHistory>;
 type EntityArrayResponseType = HttpResponse<IRepairHistory[]>;
@@ -13,10 +17,17 @@ type EntityArrayResponseType = HttpResponse<IRepairHistory[]>;
 export class RepairHistoryService {
     private resourceUrl = SERVER_API_URL + 'api/repair-histories';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     create(repairHistory: IRepairHistory): Observable<EntityResponseType> {
         return this.http.post<IRepairHistory>(this.resourceUrl, repairHistory, { observe: 'response' });
+    }
+
+    addNewRepair(vehicle: IVehicle,
+        repairDate: string,
+        selectedParts: IPart[],
+        selectedTasks: ITask[]): Observable<EntityResponseType> {
+        return this.http.post<IRepairHistory>(this.resourceUrl + "/new-repair", new NewRepair(vehicle, repairDate, selectedParts, selectedTasks), { observe: 'response' });
     }
 
     update(repairHistory: IRepairHistory): Observable<EntityResponseType> {

@@ -3,6 +3,9 @@ package com.github.workshop.service.impl;
 import com.github.workshop.service.RepairHistoryService;
 import com.github.workshop.domain.RepairHistory;
 import com.github.workshop.repository.RepairHistoryRepository;
+import com.github.workshop.service.RepairService;
+import com.github.workshop.service.dto.NewRepairDTO;
+import com.github.workshop.service.dto.RepairDTO;
 import com.github.workshop.service.dto.RepairHistoryDTO;
 import com.github.workshop.service.mapper.RepairHistoryMapper;
 import org.slf4j.Logger;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.ZoneOffset;
 import java.util.Optional;
 /**
  * Service Implementation for managing RepairHistory.
@@ -28,9 +32,12 @@ public class RepairHistoryServiceImpl implements RepairHistoryService {
 
     private final RepairHistoryMapper repairHistoryMapper;
 
-    public RepairHistoryServiceImpl(RepairHistoryRepository repairHistoryRepository, RepairHistoryMapper repairHistoryMapper) {
+    private final RepairService repairService;
+
+    public RepairHistoryServiceImpl(RepairHistoryRepository repairHistoryRepository, RepairHistoryMapper repairHistoryMapper, RepairService repairService) {
         this.repairHistoryRepository = repairHistoryRepository;
         this.repairHistoryMapper = repairHistoryMapper;
+        this.repairService = repairService;
     }
 
     /**
@@ -85,5 +92,27 @@ public class RepairHistoryServiceImpl implements RepairHistoryService {
     public void delete(Long id) {
         log.debug("Request to delete RepairHistory : {}", id);
         repairHistoryRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public RepairHistoryDTO saveNewRepair(NewRepairDTO repairDTO) {
+        Long vehicleId = repairDTO.getVehicle().getId();
+        RepairHistory repairHistory = repairHistoryRepository.findOneByVehicleId(vehicleId);
+        if(repairHistory == null) {
+            RepairHistoryDTO repairHistoryDTO = new RepairHistoryDTO();
+            repairHistoryDTO.setVehicleId(vehicleId);
+            repairHistory = repairHistoryRepository.save(repairHistoryMapper.toEntity(repairHistoryDTO));
+        }
+
+        RepairDTO newRepair = new RepairDTO();
+        newRepair.setDate(repairDTO.getRepairDate().atStartOfDay().toInstant(ZoneOffset.UTC));
+        newRepair.setHistoryId(repairHistory.getId());
+        newRepair.setTaskId(repairDTO.getTasks().get(0).getId());
+        newRepair.setPartId(repairDTO.getParts().get(0).getId());
+        newRepair.setPrice(1l);
+        repairService.save(newRepair);
+
+        return null;
     }
 }
