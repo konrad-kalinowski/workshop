@@ -1,10 +1,13 @@
 package com.github.workshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -23,6 +26,10 @@ public class Part implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
+
+    @ManyToMany(mappedBy = "parts")
+    @JsonIgnore
+    private Set<Repair> repairs = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -44,6 +51,31 @@ public class Part implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Repair> getRepairs() {
+        return repairs;
+    }
+
+    public Part repairs(Set<Repair> repairs) {
+        this.repairs = repairs;
+        return this;
+    }
+
+    public Part addRepair(Repair repair) {
+        this.repairs.add(repair);
+        repair.getParts().add(this);
+        return this;
+    }
+
+    public Part removeRepair(Repair repair) {
+        this.repairs.remove(repair);
+        repair.getParts().remove(this);
+        return this;
+    }
+
+    public void setRepairs(Set<Repair> repairs) {
+        this.repairs = repairs;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

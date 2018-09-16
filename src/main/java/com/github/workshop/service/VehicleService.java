@@ -16,7 +16,6 @@ public interface VehicleService {
      * Save a vehicle.
      *
      * @param vehicleDTO the entity to save
-
      * @return the persisted entity
      */
     VehicleDTO save(VehicleDTO vehicleDTO);
@@ -24,14 +23,10 @@ public interface VehicleService {
     /**
      * Get all the vehicles.
      *
-     *
-     * @param ownerId
      * @param pageable the pagination information
-     * @return the li
-     *
-     * st of entities
+     * @return the list of entities
      */
-    Page<VehicleDTO> findAll(Long ownerId, Pageable pageable);
+    Page<VehicleDTO> findAll(Pageable pageable);
 
 
     /**

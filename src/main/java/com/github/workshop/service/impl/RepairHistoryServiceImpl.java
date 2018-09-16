@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.ZoneOffset;
+import java.util.HashSet;
 import java.util.Optional;
 /**
  * Service Implementation for managing RepairHistory.
@@ -109,7 +110,7 @@ public class RepairHistoryServiceImpl implements RepairHistoryService {
         newRepair.setDate(repairDTO.getRepairDate().atStartOfDay().toInstant(ZoneOffset.UTC));
         newRepair.setHistoryId(repairHistory.getId());
         newRepair.setTaskId(repairDTO.getTasks().get(0).getId());
-        newRepair.setPartId(repairDTO.getParts().get(0).getId());
+        newRepair.setParts(new HashSet<>(repairDTO.getParts()));
         newRepair.setPrice(1l);
         repairService.save(newRepair);
 

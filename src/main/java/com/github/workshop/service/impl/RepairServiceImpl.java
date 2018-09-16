@@ -61,6 +61,15 @@ public class RepairServiceImpl implements RepairService {
             .map(repairMapper::toDto);
     }
 
+    /**
+     * Get all the Repair with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    public Page<RepairDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return repairRepository.findAllWithEagerRelationships(pageable).map(repairMapper::toDto);
+    }
+    
 
     /**
      * Get one repair by id.
@@ -72,7 +81,7 @@ public class RepairServiceImpl implements RepairService {
     @Transactional(readOnly = true)
     public Optional<RepairDTO> findOne(Long id) {
         log.debug("Request to get Repair : {}", id);
-        return repairRepository.findById(id)
+        return repairRepository.findOneWithEagerRelationships(id)
             .map(repairMapper::toDto);
     }
 

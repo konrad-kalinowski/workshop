@@ -27,9 +27,9 @@
                 </dd>
                 <dt><span jhiTranslate="workshopApp.repair.part">Part</span></dt>
                 <dd>
-                    <div *ngIf="repair.partId">
-                        <a [routerLink]="['/part', repair.partId, 'view']">{{repair.partId}}</a>
-                    </div>
+                    <span *ngFor="let part of repair.parts; let last = last">
+                        <a [routerLink]="['/part', part?.id, 'view' ]">{{part.id}}</a>{{last ? '' : ', '}}
+                    </span>
                 </dd>
             </dl>
 

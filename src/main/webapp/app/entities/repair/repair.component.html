@@ -19,7 +19,6 @@
             <th jhiSortBy="date"><span jhiTranslate="workshopApp.repair.date">Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="historyId"><span jhiTranslate="workshopApp.repair.history">History</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="taskId"><span jhiTranslate="workshopApp.repair.task">Task</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="partId"><span jhiTranslate="workshopApp.repair.part">Part</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -36,11 +35,6 @@
                 <td>
                     <div *ngIf="repair.taskId">
                         <a [routerLink]="['../task', repair.taskId , 'view' ]" >{{repair.taskId}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="repair.partId">
-                        <a [routerLink]="['../part', repair.partId , 'view' ]" >{{repair.partId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -7,6 +7,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -38,9 +40,11 @@ public class Repair implements Serializable {
     @JsonIgnoreProperties("")
     private Task task;
 
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private Part part;
+    @ManyToMany
+    @JoinTable(name = "repair_part",
+               joinColumns = @JoinColumn(name = "repairs_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "parts_id", referencedColumnName = "id"))
+    private Set<Part> parts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -103,17 +107,29 @@ public class Repair implements Serializable {
         this.task = task;
     }
 
-    public Part getPart() {
-        return part;
+    public Set<Part> getParts() {
+        return parts;
     }
 
-    public Repair part(Part part) {
-        this.part = part;
+    public Repair parts(Set<Part> parts) {
+        this.parts = parts;
         return this;
     }
 
-    public void setPart(Part part) {
-        this.part = part;
+    public Repair addPart(Part part) {
+        this.parts.add(part);
+        part.getRepairs().add(this);
+        return this;
+    }
+
+    public Repair removePart(Part part) {
+        this.parts.remove(part);
+        part.getRepairs().remove(this);
+        return this;
+    }
+
+    public void setParts(Set<Part> parts) {
+        this.parts = parts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

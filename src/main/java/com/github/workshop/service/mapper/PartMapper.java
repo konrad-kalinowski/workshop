@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface PartMapper extends EntityMapper<PartDTO, Part> {
 
 
+    @Mapping(target = "repairs", ignore = true)
+    Part toEntity(PartDTO partDTO);
 
     default Part fromId(Long id) {
         if (id == null) {

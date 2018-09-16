@@ -30,10 +30,12 @@
             "otherEntityField": "id"
         },
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "repair",
             "relationshipName": "part",
             "otherEntityName": "part",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "changelogDate": "20180903211606",

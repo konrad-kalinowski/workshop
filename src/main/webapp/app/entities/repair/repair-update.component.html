@@ -57,10 +57,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="workshopApp.repair.part" for="field_part">Part</label>
-                    <select class="form-control" id="field_part" name="part" [(ngModel)]="repair.partId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="partOption.id" *ngFor="let partOption of parts; trackBy: trackPartById">{{partOption.id}}</option>
+                    <label jhiTranslate="workshopApp.repair.part" for="field_part">Part</label>
+                    <select class="form-control" id="field_part" multiple name="part" [(ngModel)]="repair.parts">
+                        <option [ngValue]="getSelected(repair.parts, partOption)" *ngFor="let partOption of parts; trackBy: trackPartById">{{partOption.id}}</option>
                     </select>
                 </div>
             </div>

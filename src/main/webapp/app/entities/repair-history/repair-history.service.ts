@@ -17,7 +17,7 @@ type EntityArrayResponseType = HttpResponse<IRepairHistory[]>;
 export class RepairHistoryService {
     private resourceUrl = SERVER_API_URL + 'api/repair-histories';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
     create(repairHistory: IRepairHistory): Observable<EntityResponseType> {
         return this.http.post<IRepairHistory>(this.resourceUrl, repairHistory, { observe: 'response' });

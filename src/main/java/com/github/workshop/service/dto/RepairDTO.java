@@ -3,6 +3,8 @@ package com.github.workshop.service.dto;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -22,7 +24,7 @@ public class RepairDTO implements Serializable {
 
     private Long taskId;
 
-    private Long partId;
+    private Set<PartDTO> parts = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -64,12 +66,12 @@ public class RepairDTO implements Serializable {
         this.taskId = taskId;
     }
 
-    public Long getPartId() {
-        return partId;
+    public Set<PartDTO> getParts() {
+        return parts;
     }
 
-    public void setPartId(Long partId) {
-        this.partId = partId;
+    public void setParts(Set<PartDTO> parts) {
+        this.parts = parts;
     }
 
     @Override
@@ -101,7 +103,6 @@ public class RepairDTO implements Serializable {
             ", date='" + getDate() + "'" +
             ", history=" + getHistoryId() +
             ", task=" + getTaskId() +
-            ", part=" + getPartId() +
             "}";
     }
 }

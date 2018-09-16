@@ -35,8 +35,11 @@ relationship OneToOne {
 relationship ManyToOne {
   Vehicle{owner} to Owner,
   Repair{history} to RepairHistory,
-  Repair{task} to Task,
-  Repair{part} to Part
+  Repair{task} to Task
+}
+
+relationship ManyToMany {
+	Repair{part} to Part{repair}
 }
 
 // Set pagination options

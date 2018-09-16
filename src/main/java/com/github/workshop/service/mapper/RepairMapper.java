@@ -13,12 +13,10 @@ public interface RepairMapper extends EntityMapper<RepairDTO, Repair> {
 
     @Mapping(source = "history.id", target = "historyId")
     @Mapping(source = "task.id", target = "taskId")
-    @Mapping(source = "part.id", target = "partId")
     RepairDTO toDto(Repair repair);
 
     @Mapping(source = "historyId", target = "history")
     @Mapping(source = "taskId", target = "task")
-    @Mapping(source = "partId", target = "part")
     Repair toEntity(RepairDTO repairDTO);
 
     default Repair fromId(Long id) {

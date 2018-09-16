@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IPart } from 'app/shared/model//part.model';
 
 export interface IRepair {
     id?: number;
@@ -6,7 +7,7 @@ export interface IRepair {
     date?: Moment;
     historyId?: number;
     taskId?: number;
-    partId?: number;
+    parts?: IPart[];
 }
 
 export class Repair implements IRepair {
@@ -16,6 +17,6 @@ export class Repair implements IRepair {
         public date?: Moment,
         public historyId?: number,
         public taskId?: number,
-        public partId?: number
+        public parts?: IPart[]
     ) {}
 }

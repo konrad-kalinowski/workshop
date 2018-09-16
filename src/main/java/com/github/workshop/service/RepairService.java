@@ -28,7 +28,13 @@ public interface RepairService {
      */
     Page<RepairDTO> findAll(Pageable pageable);
 
-
+    /**
+     * Get all the Repair with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    Page<RepairDTO> findAllWithEagerRelationships(Pageable pageable);
+    
     /**
      * Get the "id" repair.
      *

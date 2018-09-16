@@ -16,7 +16,8 @@
             "detail": {
                 "title": "Part"
             },
-            "name": "Name"
+            "name": "Name",
+            "repair": "Repair"
         }
     }
 }

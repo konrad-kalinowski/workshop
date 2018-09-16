@@ -106,6 +106,17 @@ export class RepairUpdateComponent implements OnInit {
     trackPartById(index: number, item: IPart) {
         return item.id;
     }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
+    }
     get repair() {
         return this._repair;
     }

@@ -21,7 +21,7 @@ export class TaskUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ task }) => {
             this.task = task;
         });
-    }  
+    }
 
     previousState() {
         window.history.back();

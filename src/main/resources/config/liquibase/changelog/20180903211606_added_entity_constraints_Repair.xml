@@ -20,11 +20,16 @@
                                  referencedColumnNames="id"
                                  referencedTableName="task"/>
 
-        <addForeignKeyConstraint baseColumnNames="part_id"
-                                 baseTableName="repair"
-                                 constraintName="fk_repair_part_id"
+        <addForeignKeyConstraint baseColumnNames="repairs_id"
+                                 baseTableName="repair_part"
+                                 constraintName="fk_repair_part_repairs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="repair"/>
+        <addForeignKeyConstraint baseColumnNames="parts_id"
+                                 baseTableName="repair_part"
+                                 constraintName="fk_repair_part_parts_id"
                                  referencedColumnNames="id"
                                  referencedTableName="part"/>
-
+        
     </changeSet>
 </databaseChangeLog>

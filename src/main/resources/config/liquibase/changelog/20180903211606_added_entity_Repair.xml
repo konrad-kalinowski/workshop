@@ -38,13 +38,20 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="part_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="repair" columnName="jhi_date" columnDataType="datetime"/>
+        
+        <createTable tableName="repair_part">
+            <column name="parts_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="repairs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="repairs_id, parts_id" tableName="repair_part"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
