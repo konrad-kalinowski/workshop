@@ -109,7 +109,7 @@ public class RepairHistoryServiceImpl implements RepairHistoryService {
         RepairDTO newRepair = new RepairDTO();
         newRepair.setDate(repairDTO.getRepairDate().atStartOfDay().toInstant(ZoneOffset.UTC));
         newRepair.setHistoryId(repairHistory.getId());
-        newRepair.setTaskId(repairDTO.getTasks().get(0).getId());
+        newRepair.setTasks(new HashSet<>(repairDTO.getTasks()));
         newRepair.setParts(new HashSet<>(repairDTO.getParts()));
         newRepair.setPrice(1l);
         repairService.save(newRepair);

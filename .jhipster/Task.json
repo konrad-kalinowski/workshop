@@ -9,7 +9,15 @@
             ]
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "repair",
+            "otherEntityName": "repair",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "task"
+        }
+    ],
     "changelogDate": "20180903211604",
     "entityTableName": "task",
     "dto": "mapstruct",

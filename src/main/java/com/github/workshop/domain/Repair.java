@@ -36,15 +36,17 @@ public class Repair implements Serializable {
     @JsonIgnoreProperties("")
     private RepairHistory history;
 
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private Task task;
-
     @ManyToMany
     @JoinTable(name = "repair_part",
                joinColumns = @JoinColumn(name = "repairs_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "parts_id", referencedColumnName = "id"))
     private Set<Part> parts = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "repair_task",
+               joinColumns = @JoinColumn(name = "repairs_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "tasks_id", referencedColumnName = "id"))
+    private Set<Task> tasks = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -94,19 +96,6 @@ public class Repair implements Serializable {
         this.history = repairHistory;
     }
 
-    public Task getTask() {
-        return task;
-    }
-
-    public Repair task(Task task) {
-        this.task = task;
-        return this;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
-    }
-
     public Set<Part> getParts() {
         return parts;
     }
@@ -130,6 +119,31 @@ public class Repair implements Serializable {
 
     public void setParts(Set<Part> parts) {
         this.parts = parts;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public Repair tasks(Set<Task> tasks) {
+        this.tasks = tasks;
+        return this;
+    }
+
+    public Repair addTask(Task task) {
+        this.tasks.add(task);
+        task.getRepairs().add(this);
+        return this;
+    }
+
+    public Repair removeTask(Task task) {
+        this.tasks.remove(task);
+        task.getRepairs().remove(this);
+        return this;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

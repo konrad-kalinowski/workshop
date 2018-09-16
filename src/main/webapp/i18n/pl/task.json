@@ -16,7 +16,8 @@
             "detail": {
                 "title": "Task"
             },
-            "title": "Title"
+            "title": "Title",
+            "repair": "Repair"
         }
     }
 }

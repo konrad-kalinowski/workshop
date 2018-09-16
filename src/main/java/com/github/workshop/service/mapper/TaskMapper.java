@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface TaskMapper extends EntityMapper<TaskDTO, Task> {
 
 
+    @Mapping(target = "repairs", ignore = true)
+    Task toEntity(TaskDTO taskDTO);
 
     default Task fromId(Long id) {
         if (id == null) {

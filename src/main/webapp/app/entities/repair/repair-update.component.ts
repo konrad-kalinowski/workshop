@@ -10,10 +10,10 @@ import { IRepair } from 'app/shared/model/repair.model';
 import { RepairService } from './repair.service';
 import { IRepairHistory } from 'app/shared/model/repair-history.model';
 import { RepairHistoryService } from 'app/entities/repair-history';
-import { ITask } from 'app/shared/model/task.model';
-import { TaskService } from 'app/entities/task';
 import { IPart } from 'app/shared/model/part.model';
 import { PartService } from 'app/entities/part';
+import { ITask } from 'app/shared/model/task.model';
+import { TaskService } from 'app/entities/task';
 
 @Component({
     selector: 'jhi-repair-update',
@@ -25,17 +25,17 @@ export class RepairUpdateComponent implements OnInit {
 
     repairhistories: IRepairHistory[];
 
-    tasks: ITask[];
-
     parts: IPart[];
+
+    tasks: ITask[];
     date: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private repairService: RepairService,
         private repairHistoryService: RepairHistoryService,
-        private taskService: TaskService,
         private partService: PartService,
+        private taskService: TaskService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -50,15 +50,15 @@ export class RepairUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.taskService.query().subscribe(
-            (res: HttpResponse<ITask[]>) => {
-                this.tasks = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
         this.partService.query().subscribe(
             (res: HttpResponse<IPart[]>) => {
                 this.parts = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.taskService.query().subscribe(
+            (res: HttpResponse<ITask[]>) => {
+                this.tasks = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -99,11 +99,11 @@ export class RepairUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackTaskById(index: number, item: ITask) {
+    trackPartById(index: number, item: IPart) {
         return item.id;
     }
 
-    trackPartById(index: number, item: IPart) {
+    trackTaskById(index: number, item: ITask) {
         return item.id;
     }
 

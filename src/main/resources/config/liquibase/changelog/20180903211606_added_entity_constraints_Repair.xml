@@ -14,12 +14,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="repair_history"/>
 
-        <addForeignKeyConstraint baseColumnNames="task_id"
-                                 baseTableName="repair"
-                                 constraintName="fk_repair_task_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="task"/>
-
         <addForeignKeyConstraint baseColumnNames="repairs_id"
                                  baseTableName="repair_part"
                                  constraintName="fk_repair_part_repairs_id"
@@ -30,6 +24,17 @@
                                  constraintName="fk_repair_part_parts_id"
                                  referencedColumnNames="id"
                                  referencedTableName="part"/>
+        
+        <addForeignKeyConstraint baseColumnNames="repairs_id"
+                                 baseTableName="repair_task"
+                                 constraintName="fk_repair_task_repairs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="repair"/>
+        <addForeignKeyConstraint baseColumnNames="tasks_id"
+                                 baseTableName="repair_task"
+                                 constraintName="fk_repair_task_tasks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task"/>
         
     </changeSet>
 </databaseChangeLog>

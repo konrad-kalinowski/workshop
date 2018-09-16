@@ -19,8 +19,8 @@
             "price": "Price",
             "date": "Date",
             "history": "History",
-            "task": "Task",
-            "part": "Part"
+            "part": "Part",
+            "task": "Task"
         }
     }
 }

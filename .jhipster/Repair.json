@@ -24,16 +24,18 @@
             "otherEntityField": "id"
         },
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "task",
-            "otherEntityName": "task",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "repair",
             "relationshipName": "part",
             "otherEntityName": "part",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "repair",
+            "relationshipName": "task",
+            "otherEntityName": "task",
             "otherEntityField": "id",
             "ownerSide": true
         }

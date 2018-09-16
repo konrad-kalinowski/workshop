@@ -1,13 +1,14 @@
 import { Moment } from 'moment';
 import { IPart } from 'app/shared/model//part.model';
+import { ITask } from 'app/shared/model//task.model';
 
 export interface IRepair {
     id?: number;
     price?: number;
     date?: Moment;
     historyId?: number;
-    taskId?: number;
     parts?: IPart[];
+    tasks?: ITask[];
 }
 
 export class Repair implements IRepair {
@@ -16,7 +17,7 @@ export class Repair implements IRepair {
         public price?: number,
         public date?: Moment,
         public historyId?: number,
-        public taskId?: number,
-        public parts?: IPart[]
+        public parts?: IPart[],
+        public tasks?: ITask[]
     ) {}
 }

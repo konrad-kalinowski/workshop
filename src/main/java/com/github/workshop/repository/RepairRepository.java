@@ -17,14 +17,14 @@ import java.util.Optional;
 @Repository
 public interface RepairRepository extends JpaRepository<Repair, Long> {
 
-    @Query(value = "select distinct repair from Repair repair left join fetch repair.parts",
+    @Query(value = "select distinct repair from Repair repair left join fetch repair.parts left join fetch repair.tasks",
         countQuery = "select count(distinct repair) from Repair repair")
     Page<Repair> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct repair from Repair repair left join fetch repair.parts")
+    @Query(value = "select distinct repair from Repair repair left join fetch repair.parts left join fetch repair.tasks")
     List<Repair> findAllWithEagerRelationships();
 
-    @Query("select repair from Repair repair left join fetch repair.parts where repair.id =:id")
+    @Query("select repair from Repair repair left join fetch repair.parts left join fetch repair.tasks where repair.id =:id")
     Optional<Repair> findOneWithEagerRelationships(@Param("id") Long id);
 
 }
