@@ -8,7 +8,13 @@
             "otherEntityName": "vehicle",
             "otherEntityField": "id",
             "ownerSide": true,
-            "otherEntityRelationshipName": "repairHistory"
+            "otherEntityRelationshipName": "history"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "repair",
+            "otherEntityName": "repair",
+            "otherEntityRelationshipName": "history"
         }
     ],
     "changelogDate": "20180903211607",

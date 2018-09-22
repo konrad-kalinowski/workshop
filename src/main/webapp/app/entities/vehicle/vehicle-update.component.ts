@@ -6,6 +6,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IVehicle } from 'app/shared/model/vehicle.model';
 import { VehicleService } from './vehicle.service';
+import { IRepairHistory } from 'app/shared/model/repair-history.model';
+import { RepairHistoryService } from 'app/entities/repair-history';
 import { IOwner } from 'app/shared/model/owner.model';
 import { OwnerService } from 'app/entities/owner';
 
@@ -17,11 +19,14 @@ export class VehicleUpdateComponent implements OnInit {
     private _vehicle: IVehicle;
     isSaving: boolean;
 
+    repairhistories: IRepairHistory[];
+
     owners: IOwner[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private vehicleService: VehicleService,
+        private repairHistoryService: RepairHistoryService,
         private ownerService: OwnerService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -31,6 +36,12 @@ export class VehicleUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ vehicle }) => {
             this.vehicle = vehicle;
         });
+        this.repairHistoryService.query().subscribe(
+            (res: HttpResponse<IRepairHistory[]>) => {
+                this.repairhistories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.ownerService.query().subscribe(
             (res: HttpResponse<IOwner[]>) => {
                 this.owners = res.body;
@@ -67,6 +78,10 @@ export class VehicleUpdateComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackRepairHistoryById(index: number, item: IRepairHistory) {
+        return item.id;
     }
 
     trackOwnerById(index: number, item: IOwner) {

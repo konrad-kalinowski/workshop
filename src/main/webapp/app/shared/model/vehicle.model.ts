@@ -3,6 +3,7 @@ export interface IVehicle {
     registrationNumber?: string;
     brand?: string;
     model?: string;
+    historyId?: number;
     ownerId?: number;
 }
 
@@ -12,6 +13,7 @@ export class Vehicle implements IVehicle {
         public registrationNumber?: string,
         public brand?: string,
         public model?: string,
+        public historyId?: number,
         public ownerId?: number
     ) {}
 }

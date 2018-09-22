@@ -13,12 +13,6 @@
                 <dd>
                     <span>{{repair.date}}</span>
                 </dd>
-                <dt><span jhiTranslate="workshopApp.repair.history">History</span></dt>
-                <dd>
-                    <div *ngIf="repair.historyId">
-                        <a [routerLink]="['/repair-history', repair.historyId, 'view']">{{repair.historyId}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="workshopApp.repair.part">Part</span></dt>
                 <dd>
                     <span *ngFor="let part of repair.parts; let last = last">
@@ -30,6 +24,12 @@
                     <span *ngFor="let task of repair.tasks; let last = last">
                         <a [routerLink]="['/task', task?.id, 'view' ]">{{task.id}}</a>{{last ? '' : ', '}}
                     </span>
+                </dd>
+                <dt><span jhiTranslate="workshopApp.repair.history">History</span></dt>
+                <dd>
+                    <div *ngIf="repair.historyId">
+                        <a [routerLink]="['/repair-history', repair.historyId, 'view']">{{repair.historyId}}</a>
+                    </div>
                 </dd>
             </dl>
 

@@ -18,14 +18,8 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "history",
-            "otherEntityName": "repairHistory",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "repair",
+            "otherEntityRelationshipName": "",
             "relationshipName": "part",
             "otherEntityName": "part",
             "otherEntityField": "id",
@@ -33,11 +27,17 @@
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "repair",
+            "otherEntityRelationshipName": "",
             "relationshipName": "task",
             "otherEntityName": "task",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "history",
+            "otherEntityName": "repairHistory",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20180903211606",

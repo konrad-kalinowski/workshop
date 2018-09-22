@@ -19,6 +19,7 @@
             "registrationNumber": "Registration Number",
             "brand": "Brand",
             "model": "Model",
+            "history": "History",
             "owner": "Owner"
         }
     }

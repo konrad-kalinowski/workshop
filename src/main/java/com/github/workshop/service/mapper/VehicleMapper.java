@@ -14,6 +14,7 @@ public interface VehicleMapper extends EntityMapper<VehicleDTO, Vehicle> {
     @Mapping(source = "owner.id", target = "ownerId")
     VehicleDTO toDto(Vehicle vehicle);
 
+    @Mapping(target = "history", ignore = true)
     @Mapping(source = "ownerId", target = "owner")
     Vehicle toEntity(VehicleDTO vehicleDTO);
 

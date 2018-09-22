@@ -27,7 +27,14 @@
             ]
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "vehicle",
+            "otherEntityName": "vehicle",
+            "otherEntityRelationshipName": "owner"
+        }
+    ],
     "changelogDate": "20180903211602",
     "entityTableName": "owner",
     "dto": "mapstruct",

@@ -8,12 +8,6 @@
     -->
     <changeSet id="20180903211606-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="history_id"
-                                 baseTableName="repair"
-                                 constraintName="fk_repair_history_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="repair_history"/>
-
         <addForeignKeyConstraint baseColumnNames="repairs_id"
                                  baseTableName="repair_part"
                                  constraintName="fk_repair_part_repairs_id"
@@ -36,5 +30,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="task"/>
         
+        <addForeignKeyConstraint baseColumnNames="history_id"
+                                 baseTableName="repair"
+                                 constraintName="fk_repair_history_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="repair_history"/>
+
     </changeSet>
 </databaseChangeLog>

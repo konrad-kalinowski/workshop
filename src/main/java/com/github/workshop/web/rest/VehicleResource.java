@@ -22,6 +22,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Vehicle.
@@ -86,11 +87,17 @@ public class VehicleResource {
      * GET  /vehicles : get all the vehicles.
      *
      * @param pageable the pagination information
+     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of vehicles in body
      */
     @GetMapping("/vehicles")
     @Timed
-    public ResponseEntity<List<VehicleDTO>> getAllVehicles(Pageable pageable) {
+    public ResponseEntity<List<VehicleDTO>> getAllVehicles(Pageable pageable, @RequestParam(required = false) String filter) {
+        if ("history-is-null".equals(filter)) {
+            log.debug("REST request to get all Vehicles where history is null");
+            return new ResponseEntity<>(vehicleService.findAllWhereHistoryIsNull(),
+                    HttpStatus.OK);
+        }
         log.debug("REST request to get a page of Vehicles");
         Page<VehicleDTO> page = vehicleService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/vehicles");

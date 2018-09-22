@@ -6,9 +6,9 @@ export interface IRepair {
     id?: number;
     price?: number;
     date?: Moment;
-    historyId?: number;
     parts?: IPart[];
     tasks?: ITask[];
+    historyId?: number;
 }
 
 export class Repair implements IRepair {
@@ -16,8 +16,8 @@ export class Repair implements IRepair {
         public id?: number,
         public price?: number,
         public date?: Moment,
-        public historyId?: number,
         public parts?: IPart[],
-        public tasks?: ITask[]
+        public tasks?: ITask[],
+        public historyId?: number
     ) {}
 }

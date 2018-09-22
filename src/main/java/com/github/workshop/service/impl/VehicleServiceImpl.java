@@ -13,8 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 /**
  * Service Implementation for managing Vehicle.
  */
@@ -61,6 +64,21 @@ public class VehicleServiceImpl implements VehicleService {
             .map(vehicleMapper::toDto);
     }
 
+
+
+    /**
+     *  get all the vehicles where History is null.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true) 
+    public List<VehicleDTO> findAllWhereHistoryIsNull() {
+        log.debug("Request to get all vehicles where History is null");
+        return StreamSupport
+            .stream(vehicleRepository.findAll().spliterator(), false)
+            .filter(vehicle -> vehicle.getHistory() == null)
+            .map(vehicleMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
      * Get one vehicle by id.

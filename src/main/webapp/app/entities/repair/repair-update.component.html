@@ -43,13 +43,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="workshopApp.repair.history" for="field_history">History</label>
-                    <select class="form-control" id="field_history" name="history" [(ngModel)]="repair.historyId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="repairHistoryOption.id" *ngFor="let repairHistoryOption of repairhistories; trackBy: trackRepairHistoryById">{{repairHistoryOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label jhiTranslate="workshopApp.repair.part" for="field_part">Part</label>
                     <select class="form-control" id="field_part" multiple name="part" [(ngModel)]="repair.parts">
                         <option [ngValue]="getSelected(repair.parts, partOption)" *ngFor="let partOption of parts; trackBy: trackPartById">{{partOption.id}}</option>
@@ -59,6 +52,13 @@
                     <label jhiTranslate="workshopApp.repair.task" for="field_task">Task</label>
                     <select class="form-control" id="field_task" multiple name="task" [(ngModel)]="repair.tasks">
                         <option [ngValue]="getSelected(repair.tasks, taskOption)" *ngFor="let taskOption of tasks; trackBy: trackTaskById">{{taskOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workshopApp.repair.history" for="field_history">History</label>
+                    <select class="form-control" id="field_history" name="history" [(ngModel)]="repair.historyId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="repairHistoryOption.id" *ngFor="let repairHistoryOption of repairhistories; trackBy: trackRepairHistoryById">{{repairHistoryOption.id}}</option>
                     </select>
                 </div>
             </div>

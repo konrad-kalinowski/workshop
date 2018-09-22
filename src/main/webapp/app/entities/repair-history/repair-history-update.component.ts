@@ -31,7 +31,7 @@ export class RepairHistoryUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ repairHistory }) => {
             this.repairHistory = repairHistory;
         });
-        this.vehicleService.query({ filter: 'repairhistory-is-null' }).subscribe(
+        this.vehicleService.query({ filter: 'history-is-null' }).subscribe(
             (res: HttpResponse<IVehicle[]>) => {
                 if (!this.repairHistory.vehicleId) {
                     this.vehicles = res.body;

@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface OwnerMapper extends EntityMapper<OwnerDTO, Owner> {
 
 
+    @Mapping(target = "vehicles", ignore = true)
+    Owner toEntity(OwnerDTO ownerDTO);
 
     default Owner fromId(Long id) {
         if (id == null) {

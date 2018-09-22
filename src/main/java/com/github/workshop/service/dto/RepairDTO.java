@@ -20,11 +20,11 @@ public class RepairDTO implements Serializable {
     @NotNull
     private Instant date;
 
-    private Long historyId;
-
     private Set<PartDTO> parts = new HashSet<>();
 
     private Set<TaskDTO> tasks = new HashSet<>();
+
+    private Long historyId;
 
     public Long getId() {
         return id;
@@ -50,14 +50,6 @@ public class RepairDTO implements Serializable {
         this.date = date;
     }
 
-    public Long getHistoryId() {
-        return historyId;
-    }
-
-    public void setHistoryId(Long repairHistoryId) {
-        this.historyId = repairHistoryId;
-    }
-
     public Set<PartDTO> getParts() {
         return parts;
     }
@@ -72,6 +64,14 @@ public class RepairDTO implements Serializable {
 
     public void setTasks(Set<TaskDTO> tasks) {
         this.tasks = tasks;
+    }
+
+    public Long getHistoryId() {
+        return historyId;
+    }
+
+    public void setHistoryId(Long repairHistoryId) {
+        this.historyId = repairHistoryId;
     }
 
     @Override

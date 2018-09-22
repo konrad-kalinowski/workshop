@@ -32,10 +32,6 @@ public class Repair implements Serializable {
     @Column(name = "jhi_date", nullable = false)
     private Instant date;
 
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private RepairHistory history;
-
     @ManyToMany
     @JoinTable(name = "repair_part",
                joinColumns = @JoinColumn(name = "repairs_id", referencedColumnName = "id"),
@@ -47,6 +43,10 @@ public class Repair implements Serializable {
                joinColumns = @JoinColumn(name = "repairs_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "tasks_id", referencedColumnName = "id"))
     private Set<Task> tasks = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("repairs")
+    private RepairHistory history;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -83,19 +83,6 @@ public class Repair implements Serializable {
         this.date = date;
     }
 
-    public RepairHistory getHistory() {
-        return history;
-    }
-
-    public Repair history(RepairHistory repairHistory) {
-        this.history = repairHistory;
-        return this;
-    }
-
-    public void setHistory(RepairHistory repairHistory) {
-        this.history = repairHistory;
-    }
-
     public Set<Part> getParts() {
         return parts;
     }
@@ -107,13 +94,11 @@ public class Repair implements Serializable {
 
     public Repair addPart(Part part) {
         this.parts.add(part);
-        part.getRepairs().add(this);
         return this;
     }
 
     public Repair removePart(Part part) {
         this.parts.remove(part);
-        part.getRepairs().remove(this);
         return this;
     }
 
@@ -132,18 +117,29 @@ public class Repair implements Serializable {
 
     public Repair addTask(Task task) {
         this.tasks.add(task);
-        task.getRepairs().add(this);
         return this;
     }
 
     public Repair removeTask(Task task) {
         this.tasks.remove(task);
-        task.getRepairs().remove(this);
         return this;
     }
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public RepairHistory getHistory() {
+        return history;
+    }
+
+    public Repair history(RepairHistory repairHistory) {
+        this.history = repairHistory;
+        return this;
+    }
+
+    public void setHistory(RepairHistory repairHistory) {
+        this.history = repairHistory;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

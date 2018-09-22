@@ -16,7 +16,8 @@
             "detail": {
                 "title": "Repair History"
             },
-            "vehicle": "Vehicle"
+            "vehicle": "Vehicle",
+            "repair": "Repair"
         }
     }
 }

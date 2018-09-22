@@ -15,6 +15,7 @@ public interface RepairHistoryMapper extends EntityMapper<RepairHistoryDTO, Repa
     RepairHistoryDTO toDto(RepairHistory repairHistory);
 
     @Mapping(source = "vehicleId", target = "vehicle")
+    @Mapping(target = "repairs", ignore = true)
     RepairHistory toEntity(RepairHistoryDTO repairHistoryDTO);
 
     default RepairHistory fromId(Long id) {

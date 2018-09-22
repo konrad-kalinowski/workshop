@@ -5,6 +5,7 @@ import com.github.workshop.service.dto.VehicleDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,6 +28,12 @@ public interface VehicleService {
      * @return the list of entities
      */
     Page<VehicleDTO> findAll(Pageable pageable);
+    /**
+     * Get all the VehicleDTO where History is null.
+     *
+     * @return the list of entities
+     */
+    List<VehicleDTO> findAllWhereHistoryIsNull();
 
 
     /**

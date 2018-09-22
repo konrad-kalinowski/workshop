@@ -1,5 +1,6 @@
 package com.github.workshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -33,8 +34,12 @@ public class Vehicle implements Serializable {
     @Column(name = "model", nullable = false)
     private String model;
 
+    @OneToOne(mappedBy = "vehicle")
+    @JsonIgnore
+    private RepairHistory history;
+
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("vehicles")
     private Owner owner;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -83,6 +88,19 @@ public class Vehicle implements Serializable {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public RepairHistory getHistory() {
+        return history;
+    }
+
+    public Vehicle history(RepairHistory repairHistory) {
+        this.history = repairHistory;
+        return this;
+    }
+
+    public void setHistory(RepairHistory repairHistory) {
+        this.history = repairHistory;
     }
 
     public Owner getOwner() {
