@@ -19,8 +19,8 @@
                 </dd>
                 <dt><span jhiTranslate="workshopApp.vehicle.owner">Owner</span></dt>
                 <dd>
-                    <div *ngIf="vehicle.ownerId">
-                        <a [routerLink]="['/owner', vehicle.ownerId, 'view']">{{vehicle.ownerId}}</a>
+                    <div *ngIf="vehicle.owner">
+                        <a [routerLink]="['/owner', vehicle.owner, 'view']">{{vehicle.owner}}</a>
                     </div>
                 </dd>
             </dl>

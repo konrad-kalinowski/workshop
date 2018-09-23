@@ -1,5 +1,7 @@
 package com.github.workshop.service.dto;
 
+import com.github.workshop.domain.Owner;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,7 +22,7 @@ public class VehicleDTO implements Serializable {
     @NotNull
     private String model;
 
-    private Long ownerId;
+    private Owner owner;
 
     public Long getId() {
         return id;
@@ -54,12 +56,12 @@ public class VehicleDTO implements Serializable {
         this.model = model;
     }
 
-    public Long getOwnerId() {
-        return ownerId;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     @Override
@@ -90,7 +92,7 @@ public class VehicleDTO implements Serializable {
             ", registrationNumber='" + getRegistrationNumber() + "'" +
             ", brand='" + getBrand() + "'" +
             ", model='" + getModel() + "'" +
-            ", owner=" + getOwnerId() +
+            ", owner=" + getOwner() +
             "}";
     }
 }

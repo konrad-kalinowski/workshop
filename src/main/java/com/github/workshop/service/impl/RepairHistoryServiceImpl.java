@@ -102,7 +102,7 @@ public class RepairHistoryServiceImpl implements RepairHistoryService {
         RepairHistory repairHistory = repairHistoryRepository.findOneByVehicleId(vehicleId);
         if(repairHistory == null) {
             RepairHistoryDTO repairHistoryDTO = new RepairHistoryDTO();
-            repairHistoryDTO.setVehicleId(vehicleId);
+            repairHistoryDTO.setVehicle(repairDTO.getVehicle());
             repairHistory = repairHistoryRepository.save(repairHistoryMapper.toEntity(repairHistoryDTO));
         }
 

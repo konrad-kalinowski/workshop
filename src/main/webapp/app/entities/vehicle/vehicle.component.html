@@ -18,7 +18,7 @@
             <th jhiSortBy="registrationNumber"><span jhiTranslate="workshopApp.vehicle.registrationNumber">Registration Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="brand"><span jhiTranslate="workshopApp.vehicle.brand">Brand</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="model"><span jhiTranslate="workshopApp.vehicle.model">Model</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="ownerId"><span jhiTranslate="workshopApp.vehicle.owner">Owner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="owner"><span jhiTranslate="workshopApp.vehicle.owner">Owner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -29,8 +29,8 @@
                 <td>{{vehicle.brand}}</td>
                 <td>{{vehicle.model}}</td>
                 <td>
-                    <div *ngIf="vehicle.ownerId">
-                        <a [routerLink]="['../owner', vehicle.ownerId , 'view' ]" >{{vehicle.ownerId}}</a>
+                    <div *ngIf="vehicle.owner">
+                        <a [routerLink]="['../owner', vehicle.owner.id , 'view' ]" >{{vehicle.owner.firstName}} {{vehicle.owner.lastName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

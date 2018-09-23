@@ -15,7 +15,8 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="vehicleId"><span jhiTranslate="workshopApp.repairHistory.vehicle">Vehicle</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="vehicle"><span jhiTranslate="workshopApp.repairHistory.vehicle">Vehicle</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="vehicle"><span jhiTranslate="workshopApp.repairHistory.vehicle">Vehicle</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -23,8 +24,13 @@
             <tr *ngFor="let repairHistory of repairHistories ;trackBy: trackId">
                 <td><a [routerLink]="['/repair-history', repairHistory.id, 'view' ]">{{repairHistory.id}}</a></td>
                 <td>
-                    <div *ngIf="repairHistory.vehicleId">
-                        <a [routerLink]="['../vehicle', repairHistory.vehicleId , 'view' ]" >{{repairHistory.vehicleId}}</a>
+                    <div *ngIf="repairHistory.vehicle">
+                        <a [routerLink]="['../vehicle', repairHistory.vehicle.id , 'view' ]" >{{repairHistory.vehicle.model}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div >
+                        test{{repairHistory.repairs.length}}
                     </div>
                 </td>
                 <td class="text-right">

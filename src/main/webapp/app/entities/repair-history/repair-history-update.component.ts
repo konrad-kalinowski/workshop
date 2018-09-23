@@ -33,10 +33,10 @@ export class RepairHistoryUpdateComponent implements OnInit {
         });
         this.vehicleService.query({ filter: 'history-is-null' }).subscribe(
             (res: HttpResponse<IVehicle[]>) => {
-                if (!this.repairHistory.vehicleId) {
+                if (!this.repairHistory.vehicle) {
                     this.vehicles = res.body;
                 } else {
-                    this.vehicleService.find(this.repairHistory.vehicleId).subscribe(
+                    this.vehicleService.find(this.repairHistory.vehicle).subscribe(
                         (subRes: HttpResponse<IVehicle>) => {
                             this.vehicles = [subRes.body].concat(res.body);
                         },

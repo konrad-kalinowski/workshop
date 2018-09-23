@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="workshopApp.repairHistory.vehicle" for="field_vehicle">Vehicle</label>
-                    <select class="form-control" id="field_vehicle" name="vehicle" [(ngModel)]="repairHistory.vehicleId">
+                    <select class="form-control" id="field_vehicle" name="vehicle" [(ngModel)]="repairHistory.vehicle">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="vehicleOption.id" *ngFor="let vehicleOption of vehicles; trackBy: trackVehicleById">{{vehicleOption.id}}</option>
                     </select>

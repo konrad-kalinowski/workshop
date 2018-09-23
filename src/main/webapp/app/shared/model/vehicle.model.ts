@@ -1,10 +1,12 @@
+import { IOwner } from 'app/shared/model/owner.model';
+
 export interface IVehicle {
     id?: number;
     registrationNumber?: string;
     brand?: string;
     model?: string;
     historyId?: number;
-    ownerId?: number;
+    owner?: IOwner;
 }
 
 export class Vehicle implements IVehicle {
@@ -14,6 +16,6 @@ export class Vehicle implements IVehicle {
         public brand?: string,
         public model?: string,
         public historyId?: number,
-        public ownerId?: number
+        public owner?: IOwner
     ) {}
 }

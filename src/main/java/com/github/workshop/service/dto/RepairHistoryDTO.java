@@ -1,7 +1,9 @@
 package com.github.workshop.service.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the RepairHistory entity.
@@ -10,7 +12,7 @@ public class RepairHistoryDTO implements Serializable {
 
     private Long id;
 
-    private Long vehicleId;
+    private VehicleDTO vehicle;
 
     public Long getId() {
         return id;
@@ -20,12 +22,12 @@ public class RepairHistoryDTO implements Serializable {
         this.id = id;
     }
 
-    public Long getVehicleId() {
-        return vehicleId;
+    public VehicleDTO getVehicle() {
+        return vehicle;
     }
 
-    public void setVehicleId(Long vehicleId) {
-        this.vehicleId = vehicleId;
+    public void setVehicle(VehicleDTO vehicle) {
+        this.vehicle = vehicle;
     }
 
     @Override
@@ -53,7 +55,7 @@ public class RepairHistoryDTO implements Serializable {
     public String toString() {
         return "RepairHistoryDTO{" +
             "id=" + getId() +
-            ", vehicle=" + getVehicleId() +
+            ", vehicle=" + getVehicle() +
             "}";
     }
 }

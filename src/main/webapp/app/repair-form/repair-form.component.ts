@@ -76,7 +76,7 @@ export class RepairFormComponent implements OnInit {
   }
   fetchOwnerVehicles() {
     this.vehicleService.query({
-      ownerId: this.selectedOwner.id
+      owner: this.selectedOwner.id
     }).subscribe(
       (res: HttpResponse<IVehicle[]>) => {
         this.vehicles = res.body;
