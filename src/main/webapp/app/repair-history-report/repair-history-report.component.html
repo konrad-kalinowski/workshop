@@ -1,11 +1,45 @@
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
-    <h6 class="text-right">{{message}}</h6>
-    <h1 class="text-capitalize text-center" jhiTranslate="repair-history-report.title">Title</h1>
-    <h5 class="text-center" jhiTranslate="repair-history-report.subtitle">Subtitle</h5>
-    <hr/>
-    <p class="text-justify" jhiTranslate="repair-history-report.content">Content</p>
+<div>
+  <h2 id="page-heading">
+    <span jhiTranslate="repair-history-report.title"></span>
+  </h2>
+  <jhi-alert></jhi-alert>
+  <br />
+  <div class="table-responsive" *ngIf="repairHistories">
+    <table class="table table-striped">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+          <th jhiSortBy="price"><span jhiTranslate="repair-history-report.name">Name</span>
+            <fa-icon [icon]="'sort'"></fa-icon>
+          </th>
+          <th jhiSortBy="date"><span jhiTranslate="repair-history-report.model">Model</span>
+            <fa-icon [icon]="'sort'"></fa-icon>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let repairHistory of repairHistories ;trackBy: trackId">
+          <td>{{repairHistory.vehicle.owner.firstName}} {{repairHistory.vehicle.owner.lastName}}</td>
+          <td>{{repairHistory.vehicle.brand}} {{repairHistory.vehicle.model}}</td>
+          <td>
+          <td class="text-right">
+            <div class="btn-group flex-btn-group-container">
+              <button type="submit" [routerLink]="['/repair', repairHistory.id, 'view' ]" class="btn btn-info btn-sm">
+                <fa-icon [icon]="'eye'"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="col-md-1"></div>
+  <div *ngIf="repairs && repairs.length">
+    <div class="row justify-content-center">
+      <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+    <div class="row justify-content-center">
+      <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true"
+        [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+    </div>
+  </div>
 </div>
