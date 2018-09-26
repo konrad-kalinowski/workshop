@@ -36,7 +36,7 @@ export class RepairHistoryUpdateComponent implements OnInit {
                 if (!this.repairHistory.vehicle) {
                     this.vehicles = res.body;
                 } else {
-                    this.vehicleService.find(this.repairHistory.vehicle).subscribe(
+                    this.vehicleService.find(this.repairHistory.vehicle.id).subscribe(
                         (subRes: HttpResponse<IVehicle>) => {
                             this.vehicles = [subRes.body].concat(res.body);
                         },

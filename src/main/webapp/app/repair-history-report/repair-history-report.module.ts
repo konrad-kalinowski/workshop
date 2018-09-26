@@ -4,14 +4,16 @@ import { RouterModule } from '@angular/router';
 import { WorkshopSharedModule } from '../shared';
 
 import { REPAIR_HISTORY_REPORT_ROUTE, RepairHistoryReportComponent } from './';
+import { OwnersRepairComponent } from 'app/repair-history-report/owners-repair.component';
 
 @NgModule({
     imports: [
       WorkshopSharedModule,
-      RouterModule.forRoot([ REPAIR_HISTORY_REPORT_ROUTE ], { useHash: true })
+      RouterModule.forChild(REPAIR_HISTORY_REPORT_ROUTE)
     ],
     declarations: [
       RepairHistoryReportComponent,
+      OwnersRepairComponent
     ],
     entryComponents: [
     ],
