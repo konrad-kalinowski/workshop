@@ -34,6 +34,7 @@ export class RepairHistoryReportComponent implements OnInit {
   owner: IOwner;
   routeData: any;
   previousPage: any;
+  repairHistory: IRepairHistory;
 
   constructor(
     private parseLinks: JhiParseLinks,
@@ -42,8 +43,7 @@ export class RepairHistoryReportComponent implements OnInit {
     private router: Router,
     private principal: Principal,
     private eventManager: JhiEventManager,
-    private activatedRoute: ActivatedRoute,
-    private repairService: RepairService
+    private activatedRoute: ActivatedRoute
   ) {
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -56,27 +56,27 @@ export class RepairHistoryReportComponent implements OnInit {
 
   ngOnInit() {
     this.loadAll();
-        this.principal.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInRepairHistories();
-    
+    this.principal.identity().then(account => {
+      this.currentAccount = account;
+    });
+    this.registerChangeInRepairHistories();
+
   }
   registerChangeInRepairHistories() {
     this.eventSubscriber = this.eventManager.subscribe('repairHistoryListModification', response => this.loadAll());
-}
+  }
 
   loadAll() {
     this.repairHistoryService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IRepairHistory[]>) => this.paginateRepairHistories(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+      .query({
+        page: this.page - 1,
+        size: this.itemsPerPage,
+        sort: this.sort()
+      })
+      .subscribe(
+        (res: HttpResponse<IRepairHistory[]>) => this.paginateRepairHistories(res.body, res.headers),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
   }
 
   sort() {
@@ -121,8 +121,5 @@ export class RepairHistoryReportComponent implements OnInit {
     this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
     this.queryCount = this.totalItems;
     this.repairHistories = data;
-}
-
-
-
+  }
 }

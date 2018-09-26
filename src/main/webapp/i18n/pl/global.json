@@ -89,7 +89,8 @@
             }
         },
         "field": {
-            "id" : "ID"
+            "id" : "ID",
+            "date": "Data"
         },
         "ribbon": {
             "dev":"Development"

@@ -50,15 +50,21 @@ public class RepairServiceImpl implements RepairService {
     /**
      * Get all the repairs.
      *
+     *
+     * @param historyId
      * @param pageable the pagination information
      * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<RepairDTO> findAll(Pageable pageable) {
+    public Page<RepairDTO> findAll(Long historyId, Pageable pageable) {
         log.debug("Request to get all Repairs");
-        return repairRepository.findAll(pageable)
-            .map(repairMapper::toDto);
+        if(historyId == null){
+            return repairRepository.findAll(pageable)
+                .map(repairMapper::toDto);
+        }
+        return repairRepository.findAllByHistoryId(historyId, pageable).map(repairMapper::toDto);
+
     }
 
     /**

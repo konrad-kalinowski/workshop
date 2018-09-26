@@ -7,6 +7,7 @@ import { Principal } from 'app/core';
 import { Subscription } from 'rxjs';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IRepairHistory } from 'app/shared/model/repair-history.model';
 
 @Component({
   selector: 'jhi-owners-repair',
@@ -27,6 +28,7 @@ export class OwnersRepairComponent implements OnInit {
   eventSubscriber: Subscription;
   routeData: any;
   previousPage: any;
+  repairHistory: IRepairHistory;
 
   constructor(
     private repairService: RepairService,
@@ -37,8 +39,10 @@ export class OwnersRepairComponent implements OnInit {
     private router: Router,
     private eventManager: JhiEventManager
   ) {
+
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.routeData = this.activatedRoute.data.subscribe(data => {
+      this.repairHistory = data.repairHistory;
       this.page = data.pagingParams.page;
       this.previousPage = data.pagingParams.page;
       this.reverse = data.pagingParams.ascending;
@@ -57,6 +61,7 @@ export class OwnersRepairComponent implements OnInit {
   loadAll() {
     this.repairService
       .query({
+        historyId: this.repairHistory.id,
         page: this.page - 1,
         size: this.itemsPerPage,
         sort: this.sort()

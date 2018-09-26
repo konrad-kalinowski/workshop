@@ -23,10 +23,12 @@ public interface RepairService {
     /**
      * Get all the repairs.
      *
+     *
+     * @param historyId
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<RepairDTO> findAll(Pageable pageable);
+    Page<RepairDTO> findAll(Long historyId, Pageable pageable);
 
     /**
      * Get all the Repair with eager load of many-to-many relationships.

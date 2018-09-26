@@ -9,18 +9,20 @@ import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JhiResolvePagingParams } from 'ng-jhipster';
 import { OwnersRepairComponent } from 'app/repair-history-report/owners-repair.component';
+import { RepairHistoryService } from 'app/entities/repair-history';
+import { IRepairHistory, RepairHistory } from 'app/shared/model/repair-history.model';
 
 @Injectable({ providedIn: 'root' })
-export class RepairResolve implements Resolve<IRepair> {
-  constructor(private service: RepairService) { }
+export class RepairHistoryResolve implements Resolve<IRepairHistory> {
+    constructor(private service: RepairHistoryService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const id = route.params['id'] ? route.params['id'] : null;
-    if (id) {
-      return this.service.find(id).pipe(map((repair: HttpResponse<Repair>) => repair.body));
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const id = route.params['id'] ? route.params['id'] : null;
+        if (id) {
+            return this.service.find(id).pipe(map((repairHistory: HttpResponse<RepairHistory>) => repairHistory.body));
+        }
+        return of(new RepairHistory());
     }
-    return of(new Repair());
-  }
 }
 
 export const REPAIR_HISTORY_REPORT_ROUTE: Routes = [
@@ -41,7 +43,8 @@ export const REPAIR_HISTORY_REPORT_ROUTE: Routes = [
     path: 'repair-history-report/:id',
     component: OwnersRepairComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
+      repairHistory: RepairHistoryResolve
     },
     data: {
       authorities: ['ROLE_USER'],

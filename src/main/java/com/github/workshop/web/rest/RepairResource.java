@@ -91,13 +91,13 @@ public class RepairResource {
      */
     @GetMapping("/repairs")
     @Timed
-    public ResponseEntity<List<RepairDTO>> getAllRepairs(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<RepairDTO>> getAllRepairs(@RequestParam(name = "historyId", required = false) Long historyId,Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Repairs");
         Page<RepairDTO> page;
         if (eagerload) {
             page = repairService.findAllWithEagerRelationships(pageable);
         } else {
-            page = repairService.findAll(pageable);
+            page = repairService.findAll(historyId ,pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/repairs?eagerload=%b", eagerload));
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
