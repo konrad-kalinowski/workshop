@@ -1,25 +1,30 @@
 package com.github.workshop.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.github.html2pdf.HtmlToPdf;
 import com.github.workshop.service.RepairService;
+import com.github.workshop.service.dto.RepairDTO;
 import com.github.workshop.web.rest.errors.BadRequestAlertException;
 import com.github.workshop.web.rest.util.HeaderUtil;
 import com.github.workshop.web.rest.util.PaginationUtil;
-import com.github.workshop.service.dto.RepairDTO;
+import com.google.common.collect.ImmutableMap;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +40,8 @@ public class RepairResource {
     private static final String ENTITY_NAME = "repair";
 
     private final RepairService repairService;
+
+    private final HtmlToPdf htmlToPdf = new HtmlToPdf();
 
     public RepairResource(RepairService repairService) {
         this.repairService = repairService;
@@ -85,19 +92,19 @@ public class RepairResource {
     /**
      * GET  /repairs : get all the repairs.
      *
-     * @param pageable the pagination information
+     * @param pageable  the pagination information
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of repairs in body
      */
     @GetMapping("/repairs")
     @Timed
-    public ResponseEntity<List<RepairDTO>> getAllRepairs(@RequestParam(name = "historyId", required = false) Long historyId,Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<RepairDTO>> getAllRepairs(@RequestParam(name = "historyId", required = false) Long historyId, Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Repairs");
         Page<RepairDTO> page;
         if (eagerload) {
             page = repairService.findAllWithEagerRelationships(pageable);
         } else {
-            page = repairService.findAll(historyId ,pageable);
+            page = repairService.findAll(historyId, pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/repairs?eagerload=%b", eagerload));
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -129,5 +136,31 @@ public class RepairResource {
         log.debug("REST request to delete Repair : {}", id);
         repairService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/repairs/{id}/pdf")
+    public ResponseEntity<InputStreamResource> downloadPdf(@PathVariable Long id) {
+        try {
+            RepairDTO repair = repairService.findOne(id).get();
+
+            String reportTemplate = IOUtils.toString(HtmlToPdf.class.getResourceAsStream("/templates/reports/repairDetails.html"));
+            byte[] pdfContent = htmlToPdf.createPdf(ImmutableMap.<String, Object>builder()
+                .put("date", repair.getDate())
+                .put("price", repair.getPrice())
+                .put("workshopaddr", "Sowno 1 /a2")
+                .build(), reportTemplate);
+
+
+            HttpHeaders respHeaders = new HttpHeaders();
+            MediaType mediaType = MediaType.parseMediaType("application/pdf");
+            respHeaders.setContentType(mediaType);
+            respHeaders.setContentLength(pdfContent.length);
+            respHeaders.setContentDispositionFormData("attachment", "test.pdf");
+            InputStreamResource isr = new InputStreamResource(new ByteArrayInputStream(pdfContent));
+            return new ResponseEntity<>(isr, respHeaders, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Failed to create pdf report", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

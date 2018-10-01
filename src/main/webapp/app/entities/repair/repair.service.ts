@@ -32,6 +32,14 @@ export class RepairService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
+    report(id: number): Observable<any> {
+        return this.http.get(`${this.resourceUrl}/1/pdf`, { observe: 'response', responseType: 'blob' }).pipe(
+            map(res => {
+                return new Blob([res.body], { type: 'application/pdf' });
+            })
+        );
+    }
+
     find(id: number): Observable<EntityResponseType> {
         return this.http
             .get<IRepair>(`${this.resourceUrl}/${id}`, { observe: 'response' })
