@@ -147,7 +147,10 @@ public class RepairResource {
             byte[] pdfContent = htmlToPdf.createPdf(ImmutableMap.<String, Object>builder()
                 .put("date", repair.getDate())
                 .put("price", repair.getPrice())
-                .put("workshopaddr", "Sowno 1 /a2")
+                .put("workshopaddr1", "Sowno 1 /a2")
+                .put("workshopaddr2", "Sianów 76-004")
+                .put("phonenumber", "123-123-123")
+                .put("tasks", repair.getTasks())
                 .build(), reportTemplate);
 
 
