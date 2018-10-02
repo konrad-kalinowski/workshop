@@ -10,21 +10,6 @@
                         [(ngModel)]="repair.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="workshopApp.repair.price" for="field_price">Price</label>
-                    <input type="number" class="form-control" name="price" id="field_price"
-                        [(ngModel)]="repair.price" required/>
-                    <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.price?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.price?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="workshopApp.repair.date" for="field_date">Date</label>
                     <div class="d-flex">
                         <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="date"
@@ -43,15 +28,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label jhiTranslate="workshopApp.repair.part" for="field_part">Part</label>
-                    <select class="form-control" id="field_part" multiple name="part" [(ngModel)]="repair.parts">
-                        <option [ngValue]="getSelected(repair.parts, partOption)" *ngFor="let partOption of parts; trackBy: trackPartById">{{partOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label jhiTranslate="workshopApp.repair.task" for="field_task">Task</label>
-                    <select class="form-control" id="field_task" multiple name="task" [(ngModel)]="repair.tasks">
-                        <option [ngValue]="getSelected(repair.tasks, taskOption)" *ngFor="let taskOption of tasks; trackBy: trackTaskById">{{taskOption.id}}</option>
+                    <label jhiTranslate="workshopApp.repair.item" for="field_item">Item</label>
+                    <select class="form-control" id="field_item" multiple name="item" [(ngModel)]="repair.items">
+                        <option [ngValue]="getSelected(repair.items, itemOption)" *ngFor="let itemOption of items; trackBy: trackItemById">{{itemOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">

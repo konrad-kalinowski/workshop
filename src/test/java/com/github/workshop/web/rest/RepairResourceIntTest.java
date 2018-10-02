@@ -49,9 +49,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = WorkshopApp.class)
 public class RepairResourceIntTest {
 
-    private static final Long DEFAULT_PRICE = 1L;
-    private static final Long UPDATED_PRICE = 2L;
-
     private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -104,7 +101,6 @@ public class RepairResourceIntTest {
      */
     public static Repair createEntity(EntityManager em) {
         Repair repair = new Repair()
-            .price(DEFAULT_PRICE)
             .date(DEFAULT_DATE);
         return repair;
     }
@@ -130,7 +126,6 @@ public class RepairResourceIntTest {
         List<Repair> repairList = repairRepository.findAll();
         assertThat(repairList).hasSize(databaseSizeBeforeCreate + 1);
         Repair testRepair = repairList.get(repairList.size() - 1);
-        assertThat(testRepair.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testRepair.getDate()).isEqualTo(DEFAULT_DATE);
     }
 
@@ -152,25 +147,6 @@ public class RepairResourceIntTest {
         // Validate the Repair in the database
         List<Repair> repairList = repairRepository.findAll();
         assertThat(repairList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    public void checkPriceIsRequired() throws Exception {
-        int databaseSizeBeforeTest = repairRepository.findAll().size();
-        // set the field null
-        repair.setPrice(null);
-
-        // Create the Repair, which fails.
-        RepairDTO repairDTO = repairMapper.toDto(repair);
-
-        restRepairMockMvc.perform(post("/api/repairs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(repairDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Repair> repairList = repairRepository.findAll();
-        assertThat(repairList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -203,7 +179,6 @@ public class RepairResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(repair.getId().intValue())))
-            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
     }
     
@@ -249,7 +224,6 @@ public class RepairResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(repair.getId().intValue()))
-            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()));
     }
     @Test
@@ -273,7 +247,6 @@ public class RepairResourceIntTest {
         // Disconnect from session so that the updates on updatedRepair are not directly saved in db
         em.detach(updatedRepair);
         updatedRepair
-            .price(UPDATED_PRICE)
             .date(UPDATED_DATE);
         RepairDTO repairDTO = repairMapper.toDto(updatedRepair);
 
@@ -286,7 +259,6 @@ public class RepairResourceIntTest {
         List<Repair> repairList = repairRepository.findAll();
         assertThat(repairList).hasSize(databaseSizeBeforeUpdate);
         Repair testRepair = repairList.get(repairList.size() - 1);
-        assertThat(testRepair.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testRepair.getDate()).isEqualTo(UPDATED_DATE);
     }
 

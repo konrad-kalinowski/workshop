@@ -6,10 +6,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the RepairHistory entity.
@@ -24,10 +22,7 @@ public class NewRepairDTO implements Serializable {
     private VehicleDTO vehicle;
 
     @NotNull
-    private List<PartDTO> parts;
-
-    @NotNull
-    private List<TaskDTO> tasks;
+    private Set<ItemDTO> items;
 
     public LocalDate getRepairDate() {
         return repairDate;
@@ -45,20 +40,12 @@ public class NewRepairDTO implements Serializable {
         this.vehicle = vehicle;
     }
 
-    public List<PartDTO> getParts() {
-        return parts;
+    public Set<ItemDTO> getItems() {
+        return items;
     }
 
-    public void setParts(List<PartDTO> parts) {
-        this.parts = parts;
-    }
-
-    public List<TaskDTO> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<TaskDTO> tasks) {
-        this.tasks = tasks;
+    public void setItems(Set<ItemDTO> items) {
+        this.items = items;
     }
 
     @Override
@@ -72,8 +59,7 @@ public class NewRepairDTO implements Serializable {
         return new EqualsBuilder()
             .append(repairDate, that.repairDate)
             .append(vehicle, that.vehicle)
-            .append(parts, that.parts)
-            .append(tasks, that.tasks)
+            .append(items, that.items)
             .isEquals();
     }
 
@@ -82,8 +68,7 @@ public class NewRepairDTO implements Serializable {
         return new HashCodeBuilder(17, 37)
             .append(repairDate)
             .append(vehicle)
-            .append(parts)
-            .append(tasks)
+            .append(items)
             .toHashCode();
     }
 
@@ -92,8 +77,7 @@ public class NewRepairDTO implements Serializable {
         return new ToStringBuilder(this)
             .append("repairDate", repairDate)
             .append("vehicle", vehicle)
-            .append("parts", parts)
-            .append("tasks", tasks)
+            .append("items", items)
             .toString();
     }
 }

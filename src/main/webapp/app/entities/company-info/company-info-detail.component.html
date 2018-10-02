@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="companyInfo">
+            <h2><span jhiTranslate="workshopApp.companyInfo.detail.title">Company Info</span> {{companyInfo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="workshopApp.companyInfo.contactLine1">Contact Line 1</span></dt>
+                <dd>
+                    <span>{{companyInfo.contactLine1}}</span>
+                </dd>
+                <dt><span jhiTranslate="workshopApp.companyInfo.contactLine2">Contact Line 2</span></dt>
+                <dd>
+                    <span>{{companyInfo.contactLine2}}</span>
+                </dd>
+                <dt><span jhiTranslate="workshopApp.companyInfo.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{companyInfo.phoneNumber}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/company-info', companyInfo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+
+{
+    "workshopApp": {
+        "companyInfo" : {
+            "home": {
+                "title": "Company Infos",
+                "createLabel": "Dodaj Company Info",
+                "createOrEditLabel": "Dodaj lub edytuj: Company Info"
+            },
+            "created": "Utworzono nowy Company Info z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Company Info z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Company Info z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Company Info {{ id }}?"
+            },
+            "detail": {
+                "title": "Company Info"
+            },
+            "contactLine1": "Contact Line 1",
+            "contactLine2": "Contact Line 2",
+            "phoneNumber": "Phone Number"
+        }
+    }
+}

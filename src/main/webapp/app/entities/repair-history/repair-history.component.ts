@@ -16,6 +16,7 @@ import { RepairHistoryService } from './repair-history.service';
 })
 export class RepairHistoryComponent implements OnInit, OnDestroy {
     currentAccount: any;
+    repairHistories: IRepairHistory[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -28,7 +29,6 @@ export class RepairHistoryComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    repairHistories: IRepairHistory[];
 
     constructor(
         private repairHistoryService: RepairHistoryService,

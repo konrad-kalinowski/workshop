@@ -7,8 +7,8 @@
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="workshopApp.repairHistory.vehicle">Vehicle</span></dt>
                 <dd>
-                    <div *ngIf="repairHistory.vehicle">
-                        <a [routerLink]="['/vehicle', repairHistory.vehicle, 'view']">{{repairHistory.vehicle}}</a>
+                    <div *ngIf="repairHistory.vehicleId">
+                        <a [routerLink]="['/vehicle', repairHistory.vehicleId, 'view']">{{repairHistory.vehicleId}}</a>
                     </div>
                 </dd>
             </dl>

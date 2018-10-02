@@ -25,24 +25,14 @@ public class Repair implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "price", nullable = false)
-    private Long price;
-
-    @NotNull
     @Column(name = "jhi_date", nullable = false)
     private Instant date;
 
     @ManyToMany
-    @JoinTable(name = "repair_part",
+    @JoinTable(name = "repair_item",
                joinColumns = @JoinColumn(name = "repairs_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "parts_id", referencedColumnName = "id"))
-    private Set<Part> parts = new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(name = "repair_task",
-               joinColumns = @JoinColumn(name = "repairs_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "tasks_id", referencedColumnName = "id"))
-    private Set<Task> tasks = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name = "items_id", referencedColumnName = "id"))
+    private Set<Item> items = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("repairs")
@@ -55,19 +45,6 @@ public class Repair implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public Repair price(Long price) {
-        this.price = price;
-        return this;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
     }
 
     public Instant getDate() {
@@ -83,50 +60,29 @@ public class Repair implements Serializable {
         this.date = date;
     }
 
-    public Set<Part> getParts() {
-        return parts;
+    public Set<Item> getItems() {
+        return items;
     }
 
-    public Repair parts(Set<Part> parts) {
-        this.parts = parts;
+    public Repair items(Set<Item> items) {
+        this.items = items;
         return this;
     }
 
-    public Repair addPart(Part part) {
-        this.parts.add(part);
+    public Repair addItem(Item item) {
+        this.items.add(item);
+        item.getRepairs().add(this);
         return this;
     }
 
-    public Repair removePart(Part part) {
-        this.parts.remove(part);
+    public Repair removeItem(Item item) {
+        this.items.remove(item);
+        item.getRepairs().remove(this);
         return this;
     }
 
-    public void setParts(Set<Part> parts) {
-        this.parts = parts;
-    }
-
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public Repair tasks(Set<Task> tasks) {
-        this.tasks = tasks;
-        return this;
-    }
-
-    public Repair addTask(Task task) {
-        this.tasks.add(task);
-        return this;
-    }
-
-    public Repair removeTask(Task task) {
-        this.tasks.remove(task);
-        return this;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
     public RepairHistory getHistory() {
@@ -167,7 +123,6 @@ public class Repair implements Serializable {
     public String toString() {
         return "Repair{" +
             "id=" + getId() +
-            ", price=" + getPrice() +
             ", date='" + getDate() + "'" +
             "}";
     }

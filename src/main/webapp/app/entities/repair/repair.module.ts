@@ -20,4 +20,4 @@ const ENTITY_STATES = [...repairRoute, ...repairPopupRoute];
     entryComponents: [RepairComponent, RepairUpdateComponent, RepairDeleteDialogComponent, RepairDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class WorkshopRepairModule { }
+export class WorkshopRepairModule {}

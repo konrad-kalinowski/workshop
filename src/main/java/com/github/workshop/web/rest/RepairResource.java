@@ -146,11 +146,10 @@ public class RepairResource {
             String reportTemplate = IOUtils.toString(HtmlToPdf.class.getResourceAsStream("/templates/reports/repairDetails.html"));
             byte[] pdfContent = htmlToPdf.createPdf(ImmutableMap.<String, Object>builder()
                 .put("date", repair.getDate())
-                .put("price", repair.getPrice())
                 .put("workshopaddr1", "Sowno 1 /a2")
                 .put("workshopaddr2", "Sianów 76-004")
                 .put("phonenumber", "123-123-123")
-                .put("tasks", repair.getTasks())
+                .put("tasks", repair.getItems())
                 .build(), reportTemplate);
 
 

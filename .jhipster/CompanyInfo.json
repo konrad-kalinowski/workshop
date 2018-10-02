@@ -1,0 +1,27 @@
+{
+    "name": "CompanyInfo",
+    "fields": [
+        {
+            "fieldName": "contactLine1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contactLine2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181002183932",
+    "entityTableName": "company_info",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -8,10 +8,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IRepair } from 'app/shared/model/repair.model';
 import { RepairService } from './repair.service';
-import { IPart } from 'app/shared/model/part.model';
-import { PartService } from 'app/entities/part';
-import { ITask } from 'app/shared/model/task.model';
-import { TaskService } from 'app/entities/task';
+import { IItem } from 'app/shared/model/item.model';
+import { ItemService } from 'app/entities/item';
 import { IRepairHistory } from 'app/shared/model/repair-history.model';
 import { RepairHistoryService } from 'app/entities/repair-history';
 
@@ -23,9 +21,7 @@ export class RepairUpdateComponent implements OnInit {
     private _repair: IRepair;
     isSaving: boolean;
 
-    parts: IPart[];
-
-    tasks: ITask[];
+    items: IItem[];
 
     repairhistories: IRepairHistory[];
     date: string;
@@ -33,8 +29,7 @@ export class RepairUpdateComponent implements OnInit {
     constructor(
         private jhiAlertService: JhiAlertService,
         private repairService: RepairService,
-        private partService: PartService,
-        private taskService: TaskService,
+        private itemService: ItemService,
         private repairHistoryService: RepairHistoryService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -44,15 +39,9 @@ export class RepairUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ repair }) => {
             this.repair = repair;
         });
-        this.partService.query().subscribe(
-            (res: HttpResponse<IPart[]>) => {
-                this.parts = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.taskService.query().subscribe(
-            (res: HttpResponse<ITask[]>) => {
-                this.tasks = res.body;
+        this.itemService.query().subscribe(
+            (res: HttpResponse<IItem[]>) => {
+                this.items = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -95,11 +84,7 @@ export class RepairUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackPartById(index: number, item: IPart) {
-        return item.id;
-    }
-
-    trackTaskById(index: number, item: ITask) {
+    trackItemById(index: number, item: IItem) {
         return item.id;
     }
 

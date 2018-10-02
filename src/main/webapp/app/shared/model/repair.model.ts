@@ -1,23 +1,13 @@
 import { Moment } from 'moment';
-import { IPart } from 'app/shared/model//part.model';
-import { ITask } from 'app/shared/model//task.model';
+import { IItem } from 'app/shared/model//item.model';
 
 export interface IRepair {
     id?: number;
-    price?: number;
     date?: Moment;
-    parts?: IPart[];
-    tasks?: ITask[];
+    items?: IItem[];
     historyId?: number;
 }
 
 export class Repair implements IRepair {
-    constructor(
-        public id?: number,
-        public price?: number,
-        public date?: Moment,
-        public parts?: IPart[],
-        public tasks?: ITask[],
-        public historyId?: number
-    ) {}
+    constructor(public id?: number, public date?: Moment, public items?: IItem[], public historyId?: number) {}
 }

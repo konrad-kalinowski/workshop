@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.DoubleStream;
 
 /**
  * Spring Data  repository for the Repair entity.
@@ -18,14 +17,14 @@ import java.util.stream.DoubleStream;
 @Repository
 public interface RepairRepository extends JpaRepository<Repair, Long> {
 
-    @Query(value = "select distinct repair from Repair repair left join fetch repair.parts left join fetch repair.tasks",
+    @Query(value = "select distinct repair from Repair repair left join fetch repair.items",
         countQuery = "select count(distinct repair) from Repair repair")
     Page<Repair> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct repair from Repair repair left join fetch repair.parts left join fetch repair.tasks")
+    @Query(value = "select distinct repair from Repair repair left join fetch repair.items")
     List<Repair> findAllWithEagerRelationships();
 
-    @Query("select repair from Repair repair left join fetch repair.parts left join fetch repair.tasks where repair.id =:id")
+    @Query("select repair from Repair repair left join fetch repair.items where repair.id =:id")
     Optional<Repair> findOneWithEagerRelationships(@Param("id") Long id);
 
     Page<Repair> findAllByHistoryId(Long historyId, Pageable pageable);

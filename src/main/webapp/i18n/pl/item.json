@@ -1,0 +1,24 @@
+
+{
+    "workshopApp": {
+        "item" : {
+            "home": {
+                "title": "Items",
+                "createLabel": "Dodaj Item",
+                "createOrEditLabel": "Dodaj lub edytuj: Item"
+            },
+            "created": "Utworzono nowy Item z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Item z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Item z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Item"
+            },
+            "name": "Name",
+            "price": "Price",
+            "repair": "Repair"
+        }
+    }
+}

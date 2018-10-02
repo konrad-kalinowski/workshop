@@ -1,12 +1,11 @@
 import { IRepair } from 'app/shared/model//repair.model';
-import { IVehicle } from 'app/shared/model/vehicle.model';
 
 export interface IRepairHistory {
     id?: number;
-    vehicle?: IVehicle;
+    vehicleId?: number;
     repairs?: IRepair[];
 }
 
 export class RepairHistory implements IRepairHistory {
-    constructor(public id?: number, public vehicle?: IVehicle, public repairs?: IRepair[]) {}
+    constructor(public id?: number, public vehicleId?: number, public repairs?: IRepair[]) {}
 }

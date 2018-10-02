@@ -2,13 +2,6 @@
     "name": "Repair",
     "fields": [
         {
-            "fieldName": "price",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "date",
             "fieldType": "Instant",
             "fieldValidateRules": [
@@ -19,17 +12,9 @@
     "relationships": [
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "part",
-            "otherEntityName": "part",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "task",
-            "otherEntityName": "task",
+            "otherEntityRelationshipName": "repair",
+            "relationshipName": "item",
+            "otherEntityName": "item",
             "otherEntityField": "id",
             "ownerSide": true
         },

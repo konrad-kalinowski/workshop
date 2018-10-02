@@ -1,3 +1,9 @@
+entity CompanyInfo {
+contactLine1 String,
+contactLine2 String,
+phoneNumber String
+}
+
 entity Owner {
 firstName String required,
 lastName String required,
@@ -20,8 +26,12 @@ name String required
 }
 
 entity Repair {
-price Long required,
 date Instant required
+}
+
+entity Item {
+name String required,
+price Float required
 }
 
 entity RepairHistory {
@@ -38,8 +48,7 @@ RepairHistory{repair} to Repair{history}
 }
 
 relationship ManyToMany {
-  Repair{part} to Part,
-  Repair{task} to Task
+ Repair to Item
 }
 
 // Set pagination options

@@ -5,24 +5,14 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="workshopApp.repair.price">Price</span></dt>
-                <dd>
-                    <span>{{repair.price}}</span>
-                </dd>
                 <dt><span jhiTranslate="workshopApp.repair.date">Date</span></dt>
                 <dd>
                     <span>{{repair.date}}</span>
                 </dd>
-                <dt><span jhiTranslate="workshopApp.repair.part">Part</span></dt>
+                <dt><span jhiTranslate="workshopApp.repair.item">Item</span></dt>
                 <dd>
-                    <span *ngFor="let part of repair.parts; let last = last">
-                        <a [routerLink]="['/part', part?.id, 'view' ]">{{part.id}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="workshopApp.repair.task">Task</span></dt>
-                <dd>
-                    <span *ngFor="let task of repair.tasks; let last = last">
-                        <a [routerLink]="['/task', task?.id, 'view' ]">{{task.id}}</a>{{last ? '' : ', '}}
+                    <span *ngFor="let item of repair.items; let last = last">
+                        <a [routerLink]="['/item', item?.id, 'view' ]">{{item.id}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="workshopApp.repair.history">History</span></dt>

@@ -16,10 +16,8 @@
             "detail": {
                 "title": "Repair"
             },
-            "price": "Price",
             "date": "Date",
-            "part": "Part",
-            "task": "Task",
+            "item": "Item",
             "history": "History"
         }
     }

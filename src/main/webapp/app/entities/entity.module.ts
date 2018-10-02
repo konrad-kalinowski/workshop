@@ -6,6 +6,8 @@ import { WorkshopTaskModule } from './task/task.module';
 import { WorkshopPartModule } from './part/part.module';
 import { WorkshopRepairModule } from './repair/repair.module';
 import { WorkshopRepairHistoryModule } from './repair-history/repair-history.module';
+import { WorkshopCompanyInfoModule } from './company-info/company-info.module';
+import { WorkshopItemModule } from './item/item.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -17,6 +19,8 @@ import { WorkshopRepairHistoryModule } from './repair-history/repair-history.mod
         WorkshopPartModule,
         WorkshopRepairModule,
         WorkshopRepairHistoryModule,
+        WorkshopCompanyInfoModule,
+        WorkshopItemModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
