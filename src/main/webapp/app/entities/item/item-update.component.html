@@ -36,6 +36,13 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workshopApp.item.repair" for="field_repair">Repair</label>
+                    <select class="form-control" id="field_repair" name="repair" [(ngModel)]="item.repairId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="repairOption.id" *ngFor="let repairOption of repairs; trackBy: trackRepairById">{{repairOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

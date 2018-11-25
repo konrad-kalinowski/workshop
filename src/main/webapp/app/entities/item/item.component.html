@@ -17,6 +17,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="workshopApp.item.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="price"><span jhiTranslate="workshopApp.item.price">Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="repairId"><span jhiTranslate="workshopApp.item.repair">Repair</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -25,6 +26,11 @@
                 <td><a [routerLink]="['/item', item.id, 'view' ]">{{item.id}}</a></td>
                 <td>{{item.name}}</td>
                 <td>{{item.price}}</td>
+                <td>
+                    <div *ngIf="item.repairId">
+                        <a [routerLink]="['../repair', item.repairId , 'view' ]" >{{item.repairId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

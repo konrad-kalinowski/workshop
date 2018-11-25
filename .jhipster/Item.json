@@ -18,11 +18,10 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-many",
             "relationshipName": "repair",
             "otherEntityName": "repair",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "item"
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20181002183938",

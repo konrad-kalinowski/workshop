@@ -44,11 +44,8 @@ RepairHistory{vehicle} to Vehicle{history}
 
 relationship OneToMany {
 Owner{vehicle} to Vehicle{owner},
-RepairHistory{repair} to Repair{history}
-}
-
-relationship ManyToMany {
- Repair to Item
+RepairHistory{repair} to Repair{history},
+Repair{item} to Item
 }
 
 // Set pagination options

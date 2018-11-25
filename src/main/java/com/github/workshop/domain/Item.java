@@ -1,13 +1,11 @@
 package com.github.workshop.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -31,9 +29,9 @@ public class Item implements Serializable {
     @Column(name = "price", nullable = false)
     private Float price;
 
-    @ManyToMany(mappedBy = "items")
-    @JsonIgnore
-    private Set<Repair> repairs = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("items")
+    private Repair repair;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -70,29 +68,17 @@ public class Item implements Serializable {
         this.price = price;
     }
 
-    public Set<Repair> getRepairs() {
-        return repairs;
+    public Repair getRepair() {
+        return repair;
     }
 
-    public Item repairs(Set<Repair> repairs) {
-        this.repairs = repairs;
+    public Item repair(Repair repair) {
+        this.repair = repair;
         return this;
     }
 
-    public Item addRepair(Repair repair) {
-        this.repairs.add(repair);
-        repair.getItems().add(this);
-        return this;
-    }
-
-    public Item removeRepair(Repair repair) {
-        this.repairs.remove(repair);
-        repair.getItems().remove(this);
-        return this;
-    }
-
-    public void setRepairs(Set<Repair> repairs) {
-        this.repairs = repairs;
+    public void setRepair(Repair repair) {
+        this.repair = repair;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

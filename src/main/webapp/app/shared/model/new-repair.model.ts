@@ -1,19 +1,12 @@
 import { IVehicle } from 'app/shared/model/vehicle.model';
-import { IPart } from 'app/shared/model/part.model';
-import { ITask } from 'app/shared/model/task.model';
+import { IItem } from 'app/shared/model/item.model';
 
 export interface INewRepair {
     vehicle: IVehicle;
     repairDate: string;
-    parts: IPart[];
-    tasks: ITask[];
+    items: IItem[];
 }
 
 export class NewRepair implements INewRepair {
-    constructor(
-        public vehicle: IVehicle,
-        public repairDate: string,
-        public parts: IPart[],
-        public tasks: ITask[]
-    ) { }
+    constructor(public vehicle: IVehicle, public repairDate: string, public items: IItem[]) {}
 }

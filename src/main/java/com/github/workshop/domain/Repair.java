@@ -1,5 +1,6 @@
 package com.github.workshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -28,10 +29,7 @@ public class Repair implements Serializable {
     @Column(name = "jhi_date", nullable = false)
     private Instant date;
 
-    @ManyToMany
-    @JoinTable(name = "repair_item",
-               joinColumns = @JoinColumn(name = "repairs_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "items_id", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "repair")
     private Set<Item> items = new HashSet<>();
 
     @ManyToOne
@@ -71,13 +69,13 @@ public class Repair implements Serializable {
 
     public Repair addItem(Item item) {
         this.items.add(item);
-        item.getRepairs().add(this);
+        item.setRepair(this);
         return this;
     }
 
     public Repair removeItem(Item item) {
         this.items.remove(item);
-        item.getRepairs().remove(this);
+        item.setRepair(null);
         return this;
     }
 

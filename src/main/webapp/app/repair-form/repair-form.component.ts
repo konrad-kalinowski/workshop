@@ -17,7 +17,8 @@ import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'jhi-repair-form',
-    templateUrl: './repair-form.component.html'
+    templateUrl: './repair-form.component.html',
+    styleUrls: ['repair-form.scss']
 })
 export class RepairFormComponent implements OnInit {
     owners: IOwner[];
@@ -29,8 +30,8 @@ export class RepairFormComponent implements OnInit {
     isSaving: boolean;
     selectedVehicle: IVehicle;
     selectedOwner: IOwner;
-    selectedTasks = [];
     selectedParts = [];
+    selectedTasks = [];
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -87,10 +88,8 @@ export class RepairFormComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        let selectedItems: Array<IItem> = [];
-        selectedItems.push(new Item());
         this.subscribeToSaveResponse(
-            this.repairHistoryService.addNewRepair(this.selectedVehicle, this.repairDate, this.selectedParts, this.selectedTasks)
+            this.repairHistoryService.addNewRepair(this.selectedVehicle, this.repairDate, this.selectedParts.concat(this.selectedTasks))
         );
     }
 
@@ -101,6 +100,20 @@ export class RepairFormComponent implements OnInit {
     previousState() {
         this.router.navigate(['']);
     }
+
+    addTask() {
+        this.selectedTasks.push(new Item());
+    }
+    addPart() {
+        this.selectedParts.push(new Item());
+    }
+    deleteTask(item: Item) {
+        this.selectedTasks = this.selectedTasks.filter(i => i !== item);
+    }
+    deletePart(item: Item) {
+        this.selectedParts = this.selectedParts.filter(i => i !== item);
+    }
+
     private onSaveSuccess() {
         this.isSaving = false;
         this.previousState();

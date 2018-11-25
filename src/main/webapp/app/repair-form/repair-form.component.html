@@ -1,63 +1,89 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-      <h2 id="jhi-vehicle-heading" jhiTranslate="repair-form.title">add repair</h2>
-      <div>
-        <jhi-alert-error></jhi-alert-error>
-      </div>
-      <div class="form-group">
-        <label class="form-control-label" jhiTranslate="repair-form.date" for="field_date">Date</label>
-        <div class="d-flex">
-            <input id="field_date" type="date" class="form-control" name="date" [(ngModel)]="repairDate"
-            required/>
-        </div>
-        <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
-            <small class="form-text text-danger"
-            [hidden]="!editForm.controls.date?.errors?.required" jhiTranslate="entity.validation.required">
-            This field is required.
-            </small>
-            <small class="form-text text-danger"
-                [hidden]="!editForm.controls.date?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                This field should be a date and time.
-            </small>
-        </div>
-    </div>
-      <div class="form-group">
-          <label class="form-control-label" jhiTranslate="repair-form.owner" for="field_owner">Owner</label>
-          <select class="form-control" id="field_owner" name="owner" [(ngModel)]="selectedOwner" required (ngModelChange)="fetchOwnerVehicles()" >
-              <option [ngValue]="ownerOption" *ngFor="let ownerOption of owners">{{ownerOption.lastName}} {{ownerOption.firstName}}</option>
-          </select>
-      </div>
-      <div class="form-group" *ngIf="selectedOwner">
-          <label class="form-control-label" jhiTranslate="repair-form.vehicle" for="field_vehicle">Vehicle</label>
-          <select class="form-control" id="field_vehicle" name="vehicle" required [(ngModel)]="selectedVehicle">
-              <option [ngValue]="vehicleOption" *ngFor="let vehicleOption of vehicles">{{vehicleOption.brand}} {{vehicleOption.model}} {{vehicleOption.registrationNumber}}</option>
-          </select>
-      </div>
-      <div class="form-group">
-        <label class="form-control-label" jhiTranslate="repair-form.tasks" for="tasks">Naprawa
-        </label>
-        <ng-select #select [items]="tasks" [multiple]="true" bindLabel="title" [(ngModel)]="selectedTasks" id="tasks" name="tasks"
-           >
-        </ng-select>
-      </div>
-      <div class="form-group">
-        <label class="form-control-label" jhiTranslate="repair-form.parts" for="parts">Części
-        </label>
-        <ng-select #select [items]="parts" [multiple]="true" bindLabel="name" [(ngModel)]="selectedParts" id="parts" name="parts"
-           >
-        </ng-select>
-      </div>
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-    </div>
-    
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-vehicle-heading" jhiTranslate="repair-form.title">add repair</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="repair-form.date" for="field_date">Date</label>
+                <div class="d-flex">
+                    <input id="field_date" type="date" class="form-control" name="date" [(ngModel)]="repairDate"
+                        required />
+                </div>
+                <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.date?.errors?.required"
+                        jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.date?.errors?.ZonedDateTimelocal"
+                        jhiTranslate="entity.validation.ZonedDateTimelocal">
+                        This field should be a date and time.
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="repair-form.owner" for="field_owner">Owner</label>
+                <select class="form-control" id="field_owner" name="owner" [(ngModel)]="selectedOwner" required
+                    (ngModelChange)="fetchOwnerVehicles()">
+                    <option [ngValue]="ownerOption" *ngFor="let ownerOption of owners">{{ownerOption.lastName}}
+                        {{ownerOption.firstName}}</option>
+                </select>
+            </div>
+            <div class="form-group" *ngIf="selectedOwner">
+                <label class="form-control-label" jhiTranslate="repair-form.vehicle" for="field_vehicle">Vehicle</label>
+                <select class="form-control" id="field_vehicle" name="vehicle" required [(ngModel)]="selectedVehicle">
+                    <option [ngValue]="vehicleOption" *ngFor="let vehicleOption of vehicles">{{vehicleOption.brand}}
+                        {{vehicleOption.model}} {{vehicleOption.registrationNumber}}</option>
+                </select>
+            </div>
 
-    </form>
-  </div>
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="repair-form.tasks" for="tasks">Taski
+                </label>
+                <div class="item-row" *ngFor="let item of selectedTasks">
+                    <ng-select class="taskPart" name="taskTitle" [(ngModel)]="item.name">
+                            <ng-option *ngFor="let task of tasks" [value]="task.title">{{task.title}}</ng-option>
+                    </ng-select>    
+                    <input type="number" class="form-control price" name="price" id="field_price" [(ngModel)]="item.price"
+                        required />
+                    <button type="button" (click)="deleteTask(item)" class="btn btn-danger btn-sm actionBar" >
+                        <fa-icon [icon]="'times'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    </button>
+                </div>
+                <button type="button" id="add-more" class="btn btn-secondary" (click)="addTask()">
+                    <fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span jhiTranslate="repair-form.add">Add more</span>
+                </button>
+            </div>
+            <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="repair-form.parts" for="parts">Party
+                    </label>
+                    <div class="item-row" *ngFor="let item of selectedParts">
+                        <ng-select class="taskPart" name="taskTitle" [(ngModel)]="item.name">
+                            <ng-option *ngFor="let part of parts" [value]="part.name">{{part.name}}</ng-option>
+                        </ng-select>
+                        <input type="number" class="form-control price" name="price" id="field_price" [(ngModel)]="item.price"
+                            required />
+                        <button type="button" (click)="deletePart(item)" class="btn btn-danger btn-sm actionBar" >
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                    <button type="button" id="add-more" class="btn btn-secondary" (click)="addPart()">
+                        <fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span jhiTranslate="repair-form.add">Add more</span>
+                    </button>
+                </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+
+
+        </form>
+    </div>
 </div>

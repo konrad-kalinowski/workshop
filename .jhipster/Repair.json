@@ -11,12 +11,10 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "repair",
+            "relationshipType": "one-to-many",
             "relationshipName": "item",
             "otherEntityName": "item",
-            "otherEntityField": "id",
-            "ownerSide": true
+            "otherEntityRelationshipName": "repair"
         },
         {
             "relationshipType": "many-to-one",

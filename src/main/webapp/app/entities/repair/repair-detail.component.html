@@ -9,12 +9,6 @@
                 <dd>
                     <span>{{repair.date}}</span>
                 </dd>
-                <dt><span jhiTranslate="workshopApp.repair.item">Item</span></dt>
-                <dd>
-                    <span *ngFor="let item of repair.items; let last = last">
-                        <a [routerLink]="['/item', item?.id, 'view' ]">{{item.id}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
                 <dt><span jhiTranslate="workshopApp.repair.history">History</span></dt>
                 <dd>
                     <div *ngIf="repair.historyId">

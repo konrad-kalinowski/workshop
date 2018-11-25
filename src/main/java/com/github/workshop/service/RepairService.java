@@ -36,7 +36,7 @@ public interface RepairService {
      * @return the list of entities
      */
     Page<RepairDTO> findAllWithEagerRelationships(Pageable pageable);
-    
+
     /**
      * Get the "id" repair.
      *

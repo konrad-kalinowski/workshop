@@ -8,8 +8,6 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IRepair } from 'app/shared/model/repair.model';
 import { RepairService } from './repair.service';
-import { IItem } from 'app/shared/model/item.model';
-import { ItemService } from 'app/entities/item';
 import { IRepairHistory } from 'app/shared/model/repair-history.model';
 import { RepairHistoryService } from 'app/entities/repair-history';
 
@@ -21,15 +19,12 @@ export class RepairUpdateComponent implements OnInit {
     private _repair: IRepair;
     isSaving: boolean;
 
-    items: IItem[];
-
     repairhistories: IRepairHistory[];
     date: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private repairService: RepairService,
-        private itemService: ItemService,
         private repairHistoryService: RepairHistoryService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -39,12 +34,6 @@ export class RepairUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ repair }) => {
             this.repair = repair;
         });
-        this.itemService.query().subscribe(
-            (res: HttpResponse<IItem[]>) => {
-                this.items = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
         this.repairHistoryService.query().subscribe(
             (res: HttpResponse<IRepairHistory[]>) => {
                 this.repairhistories = res.body;
@@ -84,23 +73,8 @@ export class RepairUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackItemById(index: number, item: IItem) {
-        return item.id;
-    }
-
     trackRepairHistoryById(index: number, item: IRepairHistory) {
         return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
     get repair() {
         return this._repair;

@@ -28,12 +28,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label jhiTranslate="workshopApp.repair.item" for="field_item">Item</label>
-                    <select class="form-control" id="field_item" multiple name="item" [(ngModel)]="repair.items">
-                        <option [ngValue]="getSelected(repair.items, itemOption)" *ngFor="let itemOption of items; trackBy: trackItemById">{{itemOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="workshopApp.repair.history" for="field_history">History</label>
                     <select class="form-control" id="field_history" name="history" [(ngModel)]="repair.historyId" >
                         <option [ngValue]="null"></option>

@@ -2,9 +2,10 @@
   "repair-form": {
     "date": "Data naprawy",
     "title": "Dodaj nową naprawę",
-    "tasks": "Lista napraw",
+    "tasks": "Taski",
     "owner": "Właściciel",
     "vehicle": "Pojazd",
-    "parts": "Lista części"
+    "parts": "Lista części",
+    "add": "Dodaj"
   }
 }

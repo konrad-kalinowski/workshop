@@ -75,7 +75,7 @@ public class RepairServiceImpl implements RepairService {
     public Page<RepairDTO> findAllWithEagerRelationships(Pageable pageable) {
         return repairRepository.findAllWithEagerRelationships(pageable).map(repairMapper::toDto);
     }
-    
+
 
     /**
      * Get one repair by id.

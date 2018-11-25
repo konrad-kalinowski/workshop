@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Repair and its DTO RepairDTO.
  */
-@Mapper(componentModel = "spring", uses = {ItemMapper.class, RepairHistoryMapper.class})
+@Mapper(componentModel = "spring", uses = {RepairHistoryMapper.class})
 public interface RepairMapper extends EntityMapper<RepairDTO, Repair> {
 
     @Mapping(source = "history.id", target = "historyId")

@@ -8,17 +8,6 @@
     -->
     <changeSet id="20180903211606-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="repairs_id"
-                                 baseTableName="repair_item"
-                                 constraintName="fk_repair_item_repairs_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="repair"/>
-        <addForeignKeyConstraint baseColumnNames="items_id"
-                                 baseTableName="repair_item"
-                                 constraintName="fk_repair_item_items_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="item"/>
-        
         <addForeignKeyConstraint baseColumnNames="history_id"
                                  baseTableName="repair"
                                  constraintName="fk_repair_history_id"

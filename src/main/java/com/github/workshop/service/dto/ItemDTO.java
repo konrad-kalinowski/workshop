@@ -17,6 +17,8 @@ public class ItemDTO implements Serializable {
     @NotNull
     private Float price;
 
+    private Long repairId;
+
     public Long getId() {
         return id;
     }
@@ -39,6 +41,14 @@ public class ItemDTO implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public Long getRepairId() {
+        return repairId;
+    }
+
+    public void setRepairId(Long repairId) {
+        this.repairId = repairId;
     }
 
     @Override
@@ -68,6 +78,7 @@ public class ItemDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", price=" + getPrice() +
+            ", repair=" + getRepairId() +
             "}";
     }
 }
