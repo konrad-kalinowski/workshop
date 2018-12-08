@@ -1,3 +1,5 @@
+import { IOwner } from 'app/shared/model/owner.model';
+
 export interface IVehicle {
     id?: number;
     registrationNumber?: string;

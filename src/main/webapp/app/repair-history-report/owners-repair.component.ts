@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IRepairHistory } from 'app/shared/model/repair-history.model';
-import saveAs from 'file-saver';
 
 @Component({
     selector: 'jhi-owners-repair',

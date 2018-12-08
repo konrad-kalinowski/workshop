@@ -1,4 +1,4 @@
-import { IVehicle } from 'app/shared/model//vehicle.model';
+import { IVehicle } from 'app/shared/model/vehicle.model';
 
 export interface IOwner {
     id?: number;

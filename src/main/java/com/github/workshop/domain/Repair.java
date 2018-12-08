@@ -29,7 +29,7 @@ public class Repair implements Serializable {
     @Column(name = "jhi_date", nullable = false)
     private Instant date;
 
-    @OneToMany(mappedBy = "repair")
+    @OneToMany(mappedBy = "repair", cascade = {CascadeType.PERSIST})
     private Set<Item> items = new HashSet<>();
 
     @ManyToOne
